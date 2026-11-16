@@ -12,6 +12,7 @@ import { ScrollShutterStage, GoldenAtmosphere } from "./components/CinematicEffe
 
 export default function App() {
   const [admissionOpen, setAdmissionOpen] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(false);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -26,8 +27,17 @@ export default function App() {
     }
     const rafId = requestAnimationFrame(raf);
 
+    const handleScroll = () => {
+      const shutterOpenThreshold = window.innerHeight * 0.95;
+      setShowNavbar(window.scrollY > shutterOpenThreshold);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
     return () => {
       cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", handleScroll);
       lenis.destroy();
     };
   }, []);
@@ -37,7 +47,12 @@ export default function App() {
       <div className="min-h-screen bg-[#F6EBD9] text-[#2B1615] relative">
         <GoldenAtmosphere />
         <ScrollProgressBar />
-        <Navbar onOpenAdmission={() => setAdmissionOpen(true)} />
+
+        <Navbar
+          onOpenAdmission={() => setAdmissionOpen(true)}
+          showMainNav={showNavbar}
+        />
+
         <main>
           <ScrollShutterStage>
             <Hero onOpenAdmission={() => setAdmissionOpen(true)} />
