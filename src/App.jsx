@@ -8,13 +8,14 @@ import ManagementSection from "./components/ManagementSection";
 import CampusSections from "./components/CampusSections";
 import PortalAndFooter from "./components/PortalAndFooter";
 import { ScrollProgressBar } from "./components/MotionPrimitives";
+import { CinematicPreloader, GoldenAtmosphere } from "./components/CinematicEffects";
 
 export default function App() {
   const [admissionOpen, setAdmissionOpen] = useState(false);
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.25,
+      duration: 1.35,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true
     });
@@ -33,7 +34,9 @@ export default function App() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="min-h-screen bg-[#F6EBD9] text-[#2B1615]">
+      <div className="min-h-screen bg-[#F6EBD9] text-[#2B1615] relative">
+        <CinematicPreloader />
+        <GoldenAtmosphere />
         <ScrollProgressBar />
         <Navbar onOpenAdmission={() => setAdmissionOpen(true)} />
         <main>
