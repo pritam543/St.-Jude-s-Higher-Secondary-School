@@ -1,4 +1,5 @@
 ﻿import React, { useState } from "react";
+import { ScrollytellingChapter } from "./ScrollytellingEngine";
 import { motion, AnimatePresence } from "framer-motion";
 import { Quote, Users, Award } from "lucide-react";
 import { leadershipMessages, managingCommittee } from "../data/schoolData";
@@ -8,16 +9,17 @@ export default function ManagementSection() {
   const [activeLeader, setActiveLeader] = useState(0);
 
   return (
-    <section id="management" className="py-24 bg-[#F6EBD9]">
+    <ScrollytellingChapter chapterLabel="Chapter II • Leadership & Governance" watermark="DIOCESE OF KHANDWA">
+      <motion.section id="management" className="py-24 bg-[#F6EBD9]" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
       <div className="max-w-7xl mx-auto px-4 space-y-20">
         <div>
           <Reveal className="max-w-3xl mx-auto text-center space-y-3 mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#7A2021]">
               Governance &amp; Guidance
             </span>
-            <h2 className="text-3xl sm:text-5xl font-bold text-[#7A2021]">
+            <motion.h2 className="text-3xl sm:text-5xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 28, letterSpacing: "0.06em" }} whileInView={{ opacity: 1, y: 0, letterSpacing: "0.01em" }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
               Messages From Leadership
-            </h2>
+            </motion.h2>
             <div className="w-24 h-1 bg-[#C59B27] mx-auto rounded-full" />
           </Reveal>
 
@@ -44,7 +46,7 @@ export default function ManagementSection() {
             ))}
           </div>
 
-          <div className="max-w-4xl mx-auto bg-[#FCF7EE] rounded-3xl p-8 sm:p-12 border-2 border-[#7A2021]/20 shadow-xl relative overflow-hidden">
+          <div className="max-w-4xl mx-auto bg-[#FCF7EE] rounded-3xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(122,32,33,0.18)] hover:border-[#C59B27] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(122,32,33,0.15)] p-8 sm:p-12 border-2 border-[#7A2021]/20 shadow-xl relative overflow-hidden">
             <Quote className="w-12 h-12 text-[#C59B27]/30 absolute top-8 right-8" />
             <AnimatePresence mode="wait">
               <motion.div
@@ -78,15 +80,15 @@ export default function ManagementSection() {
           </div>
         </div>
 
-        <Reveal className="bg-[#FCF7EE] rounded-3xl p-6 sm:p-10 border border-[#7A2021]/20 shadow-lg">
+        <Reveal className="bg-[#FCF7EE] rounded-3xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(122,32,33,0.18)] hover:border-[#C59B27] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(122,32,33,0.15)] p-6 sm:p-10 border border-[#7A2021]/20 shadow-lg">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 border-b border-[#7A2021]/15 pb-6">
             <div>
               <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#7A2021] mb-1">
                 <Users className="w-4 h-4 text-[#C59B27]" /> CBSE Bye-Laws Section 20 &amp; 21
               </div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-[#7A2021]">
+              <motion.h3 className="text-2xl sm:text-3xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>
                 Members of the Managing Committee
-              </h3>
+              </motion.h3>
             </div>
             <span className="inline-flex items-center gap-2 bg-[#7A2021] text-[#F6EBD9] text-xs font-semibold px-4 py-2 rounded-full">
               <Award className="w-4 h-4 text-[#E5C158]" /> 14 Esteemed Members
@@ -115,6 +117,9 @@ export default function ManagementSection() {
           </div>
         </Reveal>
       </div>
-    </section>
-  );
+    </motion.section>
+      </ScrollytellingChapter>
+);
 }
+
+

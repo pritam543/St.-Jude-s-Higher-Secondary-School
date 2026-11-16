@@ -1,4 +1,5 @@
 ﻿import React, { useState, useMemo } from "react";
+import { ScrollytellingChapter } from "./ScrollytellingEngine";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FileCheck2,
@@ -120,24 +121,25 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
   };
 
   return (
-    <>
+    <ScrollytellingChapter chapterLabel="Chapter IV • Portal & Admissions" watermark="ST. JUDE'S KHARGONE">
+      <>
       {/* TRANSFER CERTIFICATE (TC) VERIFICATION SECTION */}
-      <section id="tc" className="py-24 bg-[#F6EBD9]">
+      <motion.section id="tc" className="py-24 bg-[#F6EBD9]" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
         <div className="max-w-5xl mx-auto px-4 space-y-10">
           <div className="text-center space-y-3">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#7A2021]">
               CBSE Digital Verification
             </span>
-            <h2 className="text-3xl sm:text-5xl font-bold text-[#7A2021]">
+            <motion.h2 className="text-3xl sm:text-5xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 28, letterSpacing: "0.06em" }} whileInView={{ opacity: 1, y: 0, letterSpacing: "0.01em" }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
               Transfer Certificate (TC) Portal
-            </h2>
+            </motion.h2>
             <div className="w-24 h-1 bg-[#C59B27] mx-auto rounded-full" />
             <p className="text-sm sm:text-base text-[#5C3A38] max-w-2xl mx-auto">
               Verify issued Transfer Certificates online using Admission Number or TC Serial Number as per CBSE Affiliation guidelines.
             </p>
           </div>
 
-          <div className="bg-[#FCF7EE] p-8 sm:p-10 rounded-3xl border-2 border-[#7A2021]/20 shadow-xl space-y-6">
+          <div className="bg-[#FCF7EE] p-8 sm:p-10 rounded-3xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(122,32,33,0.18)] hover:border-[#C59B27] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(122,32,33,0.15)] border-2 border-[#7A2021]/20 shadow-xl space-y-6">
             <form onSubmit={handleTcSearch} className="flex flex-col sm:flex-row gap-4">
               <div className="relative flex-1">
                 <Search className="w-5 h-5 text-[#7A2021] absolute left-4 top-1/2 -translate-y-1/2" />
@@ -159,7 +161,7 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
 
             {tcResult && (
               <div
-                className={`p-5 rounded-2xl border ${
+                className={`p-5 rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl border ${
                   tcResult.found
                     ? "bg-emerald-950/5 border-emerald-700/30 text-[#2B1615]"
                     : "bg-[#7A2021]/10 border-[#7A2021]/30 text-[#7A2021]"
@@ -191,18 +193,18 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
             )}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ALBUM-BASED CINEMATIC PHOTO GALLERY */}
-      <section id="gallery" className="py-24 bg-[#FCF7EE] border-y border-[#7A2021]/15 overflow-hidden">
+      <motion.section id="gallery" className="py-24 bg-[#FCF7EE] border-y border-[#7A2021]/15 overflow-hidden" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
         <div className="max-w-7xl mx-auto px-4 space-y-12">
           <div className="max-w-3xl mx-auto text-center space-y-3">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#7A2021]">
               Campus Life &amp; Chronicles • {allPhotos.length} Archival Photos
             </span>
-            <h2 className="text-3xl sm:text-5xl font-bold text-[#7A2021]">
+            <motion.h2 className="text-3xl sm:text-5xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 28, letterSpacing: "0.06em" }} whileInView={{ opacity: 1, y: 0, letterSpacing: "0.01em" }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
               Photo Gallery &amp; Milestones
-            </h2>
+            </motion.h2>
             <div className="w-24 h-1 bg-[#C59B27] mx-auto rounded-full" />
             <p className="text-sm sm:text-base text-[#5C3A38]">
               {selectedAlbum
@@ -261,7 +263,7 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
                     transition={{ duration: 0.7, delay: idx * 0.08, ease: cinematicEase }}
                     whileHover={{ y: -8 }}
                     onClick={() => handleOpenAlbum(album.key)}
-                    className="group relative h-80 rounded-3xl overflow-hidden bg-[#240708] border-2 border-[#7A2021]/25 hover:border-[#C59B27] shadow-xl hover:shadow-2xl transition-all cursor-pointer"
+                    className="group relative h-80 rounded-3xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(122,32,33,0.18)] hover:border-[#C59B27] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(122,32,33,0.15)] overflow-hidden bg-[#240708] border-2 border-[#7A2021]/25 hover:border-[#C59B27] shadow-xl hover:shadow-2xl transition-all cursor-pointer"
                   >
                     <img
                       src={album.cover}
@@ -282,9 +284,9 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
 
                     {/* Bottom Album Title & Description */}
                     <div className="absolute bottom-5 left-6 right-6 text-[#F6EBD9] space-y-1">
-                      <h3 className="font-cinzel text-2xl font-bold text-[#F6EBD9] group-hover:text-[#E5C158] transition">
+                      <motion.h3 className="font-cinzel text-2xl font-bold text-[#F6EBD9] group-hover:text-[#E5C158] transition" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>
                         {album.label}
-                      </h3>
+                      </motion.h3>
                       <p className="text-xs sm:text-sm text-[#F6EBD9]/85">
                         {album.subtitle}
                       </p>
@@ -303,7 +305,7 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
                 className="space-y-8"
               >
                 {/* Album Header Bar with Back Button */}
-                <div className="flex flex-wrap items-center justify-between gap-4 bg-[#F6EBD9] px-6 py-4 rounded-2xl border border-[#7A2021]/20">
+                <div className="flex flex-wrap items-center justify-between gap-4 bg-[#F6EBD9] px-6 py-4 rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl border border-[#7A2021]/20">
                   <button
                     onClick={() => setSelectedAlbum(null)}
                     className="inline-flex items-center gap-2 bg-[#7A2021] hover:bg-[#541213] text-[#F6EBD9] px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider shadow transition cursor-pointer"
@@ -312,9 +314,9 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
                   </button>
 
                   <div className="text-right">
-                    <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-[#7A2021]">
+                    <motion.h3 className="font-cinzel text-xl sm:text-2xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>
                       {activeAlbumData?.label} ({activeAlbumData?.count})
-                    </h3>
+                    </motion.h3>
                     <p className="text-xs text-[#5C3A38]">{activeAlbumData?.subtitle}</p>
                   </div>
                 </div>
@@ -333,7 +335,7 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
                       }}
                       whileHover={{ y: -6 }}
                       onClick={() => setLightboxIndex(idx)}
-                      className="group relative h-72 rounded-3xl overflow-hidden bg-[#240708] border-2 border-[#7A2021]/20 hover:border-[#C59B27] shadow-lg hover:shadow-2xl transition cursor-pointer"
+                      className="group relative h-72 rounded-3xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(122,32,33,0.18)] hover:border-[#C59B27] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(122,32,33,0.15)] overflow-hidden bg-[#240708] border-2 border-[#7A2021]/20 hover:border-[#C59B27] shadow-lg hover:shadow-2xl transition cursor-pointer"
                     >
                       <img
                         src={item.url}
@@ -364,7 +366,7 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
             )}
           </AnimatePresence>
         </div>
-      </section>
+      </motion.section>
 
       {/* FULLSCREEN LIGHTBOX VIEWER */}
       <AnimatePresence>
@@ -406,7 +408,7 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
               <img
                 src={activeAlbumData.photos[lightboxIndex].url}
                 alt={activeAlbumData.photos[lightboxIndex].title}
-                className="max-h-[78vh] w-auto rounded-2xl border-2 border-[#C59B27] shadow-2xl object-contain"
+                className="max-h-[78vh] w-auto rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl border-2 border-[#C59B27] shadow-2xl object-contain"
               />
               <div className="text-center text-[#F6EBD9]">
                 <span className="text-xs uppercase tracking-widest text-[#E5C158] font-bold">
@@ -435,19 +437,19 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
       </AnimatePresence>
 
       {/* MANDATORY PUBLIC DISCLOSURE SECTION */}
-      <section id="disclosure" className="py-24 bg-[#F6EBD9]">
+      <motion.section id="disclosure" className="py-24 bg-[#F6EBD9]" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
         <div className="max-w-6xl mx-auto px-4 space-y-12">
           <div className="max-w-3xl mx-auto text-center space-y-3">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#7A2021]">
               CBSE Appendix IX Compliance
             </span>
-            <h2 className="text-3xl sm:text-5xl font-bold text-[#7A2021]">
+            <motion.h2 className="text-3xl sm:text-5xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 28, letterSpacing: "0.06em" }} whileInView={{ opacity: 1, y: 0, letterSpacing: "0.01em" }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
               Mandatory Public Disclosure
-            </h2>
+            </motion.h2>
             <div className="w-24 h-1 bg-[#C59B27] mx-auto rounded-full" />
           </div>
 
-          <div className="bg-[#FCF7EE] rounded-3xl p-6 sm:p-10 border border-[#7A2021]/20 shadow-lg overflow-x-auto">
+          <div className="bg-[#FCF7EE] rounded-3xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(122,32,33,0.18)] hover:border-[#C59B27] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(122,32,33,0.15)] p-6 sm:p-10 border border-[#7A2021]/20 shadow-lg overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-[#7A2021] text-[#F6EBD9] text-xs uppercase tracking-wider">
@@ -472,24 +474,24 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
             </table>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* CONTACT SECTION */}
-      <section id="contact" className="py-24 bg-[#FCF7EE] border-t border-[#7A2021]/15">
+      <motion.section id="contact" className="py-24 bg-[#FCF7EE] border-t border-[#7A2021]/15" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
         <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-12 gap-12 items-start">
           <div className="lg:col-span-5 space-y-6">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#7A2021]">
               Get In Touch
             </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#7A2021]">
+            <motion.h2 className="text-3xl sm:text-4xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 28, letterSpacing: "0.06em" }} whileInView={{ opacity: 1, y: 0, letterSpacing: "0.01em" }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
               Contact St. Jude&apos;s H.S. School
-            </h2>
+            </motion.h2>
             <p className="text-sm sm:text-base text-[#5C3A38] leading-relaxed">
               We welcome parents, students, and alumni to reach out during administrative office hours for admissions, academic queries, or campus visits.
             </p>
 
             <div className="space-y-4 pt-2">
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#F6EBD9] border border-[#7A2021]/15">
+              <div className="flex items-start gap-4 p-4 rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl bg-[#F6EBD9] border border-[#7A2021]/15">
                 <MapPin className="w-5 h-5 text-[#7A2021] shrink-0 mt-1" />
                 <div>
                   <h4 className="font-bold text-sm text-[#7A2021]">Campus Address</h4>
@@ -497,7 +499,7 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#F6EBD9] border border-[#7A2021]/15">
+              <div className="flex items-start gap-4 p-4 rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl bg-[#F6EBD9] border border-[#7A2021]/15">
                 <Phone className="w-5 h-5 text-[#7A2021] shrink-0 mt-1" />
                 <div>
                   <h4 className="font-bold text-sm text-[#7A2021]">Telephone</h4>
@@ -505,7 +507,7 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
                 </div>
               </div>
 
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#F6EBD9] border border-[#7A2021]/15">
+              <div className="flex items-start gap-4 p-4 rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl bg-[#F6EBD9] border border-[#7A2021]/15">
                 <Mail className="w-5 h-5 text-[#7A2021] shrink-0 mt-1" />
                 <div>
                   <h4 className="font-bold text-sm text-[#7A2021]">Official Email</h4>
@@ -515,10 +517,10 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
             </div>
           </div>
 
-          <div className="lg:col-span-7 bg-[#F6EBD9] p-8 sm:p-10 rounded-3xl border border-[#7A2021]/20 shadow-lg">
-            <h3 className="text-2xl font-bold text-[#7A2021] mb-6">Send Us a Message</h3>
+          <div className="lg:col-span-7 bg-[#F6EBD9] p-8 sm:p-10 rounded-3xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(122,32,33,0.18)] hover:border-[#C59B27] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(122,32,33,0.15)] border border-[#7A2021]/20 shadow-lg">
+            <motion.h3 className="text-2xl font-bold text-[#7A2021] mb-6" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>Send Us a Message</motion.h3>
             {contactSent ? (
-              <div className="p-6 rounded-2xl bg-[#FCF7EE] border border-[#7A2021]/20 text-center space-y-3">
+              <div className="p-6 rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl bg-[#FCF7EE] border border-[#7A2021]/20 text-center space-y-3">
                 <CheckCircle2 className="w-10 h-10 text-[#7A2021] mx-auto" />
                 <h4 className="font-cinzel font-bold text-xl text-[#7A2021]">Message Received</h4>
                 <p className="text-sm text-[#5C3A38]">
@@ -575,7 +577,7 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
             )}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* LUXURY HERITAGE FOOTER */}
       <footer className="bg-[#541213] text-[#F6EBD9] border-t-4 border-[#C59B27]">
@@ -584,7 +586,7 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#E5C158]">
               <Award className="w-4 h-4" /> Affiliation No: {schoolInfo.affiliationNo}
             </div>
-            <h3 className="text-2xl font-bold text-[#F6EBD9]">{schoolInfo.name}</h3>
+            <motion.h3 className="text-2xl font-bold text-[#F6EBD9]" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>{schoolInfo.name}</motion.h3>
             <p className="text-sm text-[#F6EBD9]/80 max-w-md leading-relaxed">
               {schoolInfo.address}. Managed by the Catholic Diocese of Khandwa (Regd.) — Sharing Divine Knowledge and Love since 1985.
             </p>
@@ -623,13 +625,13 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
       {/* ADMISSION ENQUIRY MODAL */}
       {admissionOpen && (
         <div className="fixed inset-0 z-50 bg-black/65 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#FCF7EE] max-w-lg w-full rounded-3xl border-2 border-[#7A2021] shadow-2xl overflow-hidden">
+          <div className="bg-[#FCF7EE] max-w-lg w-full rounded-3xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(122,32,33,0.18)] hover:border-[#C59B27] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(122,32,33,0.15)] border-2 border-[#7A2021] shadow-2xl overflow-hidden">
             <div className="bg-[#7A2021] text-[#F6EBD9] px-6 py-4 flex items-center justify-between">
               <div>
                 <p className="text-[10px] uppercase tracking-widest text-[#E5C158] font-bold">
                   Session 2026–2027
                 </p>
-                <h3 className="font-cinzel text-lg font-bold">Admission Enquiry Form</h3>
+                <motion.h3 className="font-cinzel text-lg font-bold" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>Admission Enquiry Form</motion.h3>
               </div>
               <button
                 onClick={() => {
@@ -712,5 +714,8 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
         </div>
       )}
     </>
-  );
+      </ScrollytellingChapter>
+);
 }
+
+

@@ -102,9 +102,9 @@ export function GoldenAtmosphere() {
     <div className="pointer-events-none fixed inset-0 z-[45] overflow-hidden">
       <div
         style={{
-          transform: `translate3d(${mousePos.x - 220}px, ${mousePos.y - 220}px, 0)`
+          transform: `translate3d(${mousePos.x - 22}px, ${mousePos.y - 22}px, 0)`
         }}
-        className="w-[440px] h-[440px] rounded-full bg-[radial-gradient(circle,rgba(197,155,39,0.09)_0%,transparent_70%)] transition-transform duration-300 ease-out hidden md:block"
+        className="w-11 h-11 rounded-full border border-[#C59B27]/65 bg-[radial-gradient(circle,rgba(229,193,88,0.35)_0%,rgba(197,155,39,0.08)_65%,transparent_100%)] shadow-[0_0_16px_rgba(197,155,39,0.35)] transition-transform duration-300 ease-out hidden md:block"
       />
 
       {particles.map((p, idx) => (
@@ -126,3 +126,5 @@ export function GoldenAtmosphere() {
     </div>
   );
 }
+
+
