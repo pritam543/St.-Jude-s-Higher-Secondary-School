@@ -1,54 +1,80 @@
-﻿import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Award } from "lucide-react";
+﻿import React, { useState, useEffect, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Award, ChevronsDown } from "lucide-react";
 
-const cinematicEase = [0.16, 1, 0.3, 1];
+export function ScrollShutterStage({ children }) {
+  const stageRef = useRef(null);
 
-export function CinematicPreloader() {
-  const [show, setShow] = useState(true);
+  // Tracks scroll over a 210vh pinned stage:
+  // 0.0 -> 0.52: Shutter rises smoothly with scroll while Hero stays pinned
+  // 0.52 -> 1.0: Shutter is fully open and Hero begins scrolling upward
+  const { scrollYProgress } = useScroll({
+    target: stageRef,
+    offset: ["start start", "end start"]
+  });
 
-  useEffect(() => {
-    const timer = setTimeout(() => setShow(false), 1650);
-    return () => clearTimeout(timer);
-  }, []);
+  const shutterY = useTransform(scrollYProgress, [0, 0.52], ["0%", "-102%"]);
+  const crestOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
+  const crestScale = useTransform(scrollYProgress, [0, 0.45], [1, 0.9]);
+  const heroScale = useTransform(scrollYProgress, [0, 0.52], [1.08, 1]);
 
   return (
-    <AnimatePresence>
-      {show && (
+    <div ref={stageRef} className="relative h-[210vh]">
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
+        {/* Hero Section Underneath Shutter */}
+        <motion.div style={{ scale: heroScale }} className="w-full h-full">
+          {children}
+        </motion.div>
+
+        {/* Scroll-Driven Royal Heritage Shutter */}
         <motion.div
-          initial={{ y: 0 }}
-          exit={{ y: "-100%" }}
-          transition={{ duration: 0.95, ease: cinematicEase }}
-          className="fixed inset-0 z-[100] bg-gradient-to-b from-[#1A0405] via-[#541213] to-[#1A0405] flex flex-col items-center justify-center text-[#F6EBD9] border-b-4 border-[#C59B27]"
+          style={{ y: shutterY }}
+          className="absolute inset-0 z-40 bg-gradient-to-b from-[#1A0405] via-[#541213] to-[#240708] flex flex-col items-center justify-center text-[#F6EBD9] border-b-[6px] border-[#C59B27] shadow-[0_25px_70px_rgba(0,0,0,0.85)] will-change-transform"
         >
+          {/* Subtle Royal Texture & Inner Gold Frame */}
+          <div className="absolute inset-4 sm:inset-7 border border-[#C59B27]/30 rounded-3xl pointer-events-none" />
+
           <motion.div
-            initial={{ opacity: 0, scale: 0.88, y: 15 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: cinematicEase }}
-            className="text-center space-y-4 px-6"
+            style={{ opacity: crestOpacity, scale: crestScale }}
+            className="text-center space-y-5 px-6 max-w-3xl"
           >
-            <div className="w-16 h-16 mx-auto rounded-full bg-[#7A2021] border-2 border-[#E5C158] flex items-center justify-center shadow-[0_0_40px_rgba(229,193,88,0.45)]">
-              <Award className="w-8 h-8 text-[#E5C158]" />
+            <div className="w-20 h-20 mx-auto rounded-full bg-[#7A2021] border-2 border-[#E5C158] flex items-center justify-center shadow-[0_0_50px_rgba(229,193,88,0.5)]">
+              <Award className="w-10 h-10 text-[#E5C158]" />
             </div>
-            <p className="text-[11px] uppercase tracking-[0.35em] text-[#E5C158] font-bold">
-              Est. 1985 • Khargone (M.P.)
+
+            <p className="text-xs sm:text-sm uppercase tracking-[0.35em] text-[#E5C158] font-bold">
+              Est. 1985 • CBSE Affiliation No. 1030166 • Khargone (M.P.)
             </p>
-            <h2 className="font-cinzel text-2xl sm:text-4xl font-bold tracking-wider text-[#F6EBD9]">
+
+            <h2 className="font-cinzel text-3xl sm:text-5xl md:text-6xl font-bold tracking-wider text-[#F6EBD9] leading-tight">
               St. Jude&apos;s Higher Secondary School
             </h2>
-            <motion.div
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 1.1, delay: 0.2, ease: cinematicEase }}
-              className="h-[2px] w-48 mx-auto bg-gradient-to-r from-transparent via-[#E5C158] to-transparent origin-center"
-            />
-            <p className="font-serif-editorial italic text-lg text-[#E5C158]/90">
+
+            <div className="h-[2px] w-56 mx-auto bg-gradient-to-r from-transparent via-[#E5C158] to-transparent" />
+
+            <p className="font-serif-editorial italic text-xl sm:text-2xl text-[#E5C158]/95">
               &ldquo;Sharing Divine Knowledge and Love&rdquo;
             </p>
+
+            <div className="pt-8 flex flex-col items-center gap-2">
+              <span className="text-[11px] uppercase tracking-[0.28em] text-[#F6EBD9]/80 font-semibold">
+                Scroll Down to Open Campus Gates
+              </span>
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+                className="w-9 h-9 rounded-full border border-[#E5C158]/50 flex items-center justify-center text-[#E5C158]"
+              >
+                <ChevronsDown className="w-5 h-5" />
+              </motion.div>
+            </div>
           </motion.div>
+
+          {/* Bottom Brass Shutter Handle Bar */}
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-28 h-1.5 rounded-full bg-[#E5C158]/75" />
         </motion.div>
-      )}
-    </AnimatePresence>
+      </div>
+    </div>
   );
 }
 
@@ -74,7 +100,6 @@ export function GoldenAtmosphere() {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[45] overflow-hidden">
-      {/* Subtle Golden Cursor Aura */}
       <div
         style={{
           transform: `translate3d(${mousePos.x - 220}px, ${mousePos.y - 220}px, 0)`
@@ -82,7 +107,6 @@ export function GoldenAtmosphere() {
         className="w-[440px] h-[440px] rounded-full bg-[radial-gradient(circle,rgba(197,155,39,0.09)_0%,transparent_70%)] transition-transform duration-300 ease-out hidden md:block"
       />
 
-      {/* Floating Ambient Gold Dust */}
       {particles.map((p, idx) => (
         <motion.span
           key={idx}

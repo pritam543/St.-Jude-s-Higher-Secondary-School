@@ -8,7 +8,7 @@ import ManagementSection from "./components/ManagementSection";
 import CampusSections from "./components/CampusSections";
 import PortalAndFooter from "./components/PortalAndFooter";
 import { ScrollProgressBar } from "./components/MotionPrimitives";
-import { CinematicPreloader, GoldenAtmosphere } from "./components/CinematicEffects";
+import { ScrollShutterStage, GoldenAtmosphere } from "./components/CinematicEffects";
 
 export default function App() {
   const [admissionOpen, setAdmissionOpen] = useState(false);
@@ -35,12 +35,13 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <div className="min-h-screen bg-[#F6EBD9] text-[#2B1615] relative">
-        <CinematicPreloader />
         <GoldenAtmosphere />
         <ScrollProgressBar />
         <Navbar onOpenAdmission={() => setAdmissionOpen(true)} />
         <main>
-          <Hero onOpenAdmission={() => setAdmissionOpen(true)} />
+          <ScrollShutterStage>
+            <Hero onOpenAdmission={() => setAdmissionOpen(true)} />
+          </ScrollShutterStage>
           <AboutSection />
           <ManagementSection />
           <CampusSections onOpenAdmission={() => setAdmissionOpen(true)} />
