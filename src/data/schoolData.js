@@ -33,19 +33,22 @@ export const leadershipMessages = [
     role: "President's Message",
     name: "Most Rev. Bp. Augustine Madathikunnel",
     designation: "Bishop of Khandwa Diocese & President, Khandwa Diocesan Educational Society",
-    message: "I am pleased to celebrate the launch of our school’s website. In today’s rapidly advancing technological and digital world, we are presented with both remarkable opportunities and significant challenges in our daily lives. St. Jude Higher Secondary School carries the important responsibility of equipping our young students to approach these challenges with creativity and a constructive mindset. On behalf of the Khandwa Education Society, I extend my heartfelt gratitude to the Manager, Rev. Fr. Shibu Parayil, the Principal, Sr. Teresa O.P., the Sisters, teachers, and non-teaching staff for their unwavering dedication and hard work in shaping this institution. May Almighty God continue to bless the students, teachers, staff, non-teaching personnel, and the Management of St. Jude Higher Secondary School."
+    message: "I am pleased to celebrate the launch of our school’s website. In today’s rapidly advancing technological and digital world, we are presented with both remarkable opportunities and significant challenges in our daily lives. St. Jude Higher Secondary School carries the important responsibility of equipping our young students to approach these challenges with creativity and a constructive mindset. On behalf of the Khandwa Education Society, I extend my heartfelt gratitude to the Manager, Rev. Fr. Shibu Parayil, the Principal, Sr. Teresa O.P., the Sisters, teachers, and non-teaching staff for their unwavering dedication and hard work in shaping this institution. May Almighty God continue to bless the students, teachers, staff, non-teaching personnel, and the Management of St. Jude Higher Secondary School.",
+    image: "/leadership/president.jpg"
   },
   {
     role: "Manager's Message",
     name: "Rev. Fr. Thomas Madickyankal",
     designation: "Manager, St. Jude's H.S. School, Khargone",
-    message: "In today’s world, the role of a school extends beyond academic excellence; it also involves inspiring and empowering students to become lifelong learners, critical thinkers, and responsible citizens in an ever-evolving global society. At St. Jude's School, we are dedicated to offering exceptional opportunities for both students and parents seeking holistic development. We have cultivated a dynamic learning environment that fosters growth and excellence. Our commitment to continuous improvement in systems, facilities, and amenities ensures that we remain at the forefront of educational innovation. We are fortunate to have a team of highly skilled and passionate teachers who are experts in their fields, with a proven track record of outstanding results in the CBSE board examinations."
+    message: "In today’s world, the role of a school extends beyond academic excellence; it also involves inspiring and empowering students to become lifelong learners, critical thinkers, and responsible citizens in an ever-evolving global society. At St. Jude's School, we are dedicated to offering exceptional opportunities for both students and parents seeking holistic development. We have cultivated a dynamic learning environment that fosters growth and excellence. Our commitment to continuous improvement in systems, facilities, and amenities ensures that we remain at the forefront of educational innovation. We are fortunate to have a team of highly skilled and passionate teachers who are experts in their fields, with a proven track record of outstanding results in the CBSE board examinations.",
+    image: "/leadership/manager.jpg"
   },
   {
     role: "Principal's Message",
     name: "Rev. Sr. Teresa D'Souza",
     designation: "Principal, St. Jude's Higher Secondary School",
-    message: "A warm welcome to all visitors to our website. Here, you will discover the wide range of creative talents our students possess, along with the school’s dedicated efforts in nurturing them. The website offers a wealth of experiences, activities, and up-to-date information. You will come to know the spectrum of our student’s creative skills and the school’s strenuous effort in nurturing them. We hope you enjoy exploring it and stay informed about the latest updates."
+    message: "A warm welcome to all visitors to our website. Here, you will discover the wide range of creative talents our students possess, along with the school’s dedicated efforts in nurturing them. The website offers a wealth of experiences, activities, and up-to-date information. You will come to know the spectrum of our student’s creative skills and the school’s strenuous effort in nurturing them. We hope you enjoy exploring it and stay informed about the latest updates.",
+    image: "/leadership/principal.jpg"
   }
 ];
 
@@ -59,18 +62,30 @@ export const historyTimeline = [
 export const managingCommittee = [
   { sno: 1, name: "Rev. Bp. Augustine Madathikunnel", role: "Chairman" },
   { sno: 2, name: "Rev. Fr. John Victor", role: "Secretary Education Society" },
-  { sno: 3, name: "Rev. Fr. Thomas Madickyankal", role: "Manager, St. Jude's Hr. Sec. School, Khargone" },
-  { sno: 4, name: "Rev. Sr. Teresa D'Souza", role: "Principal & Secretary, St. Jude's Hr. Sec. School, Khargone" },
+  { sno: 3, name: "Rev. Fr. Thomas Madickyankal", role: "Manager, St. Jude's Hr. Sec. School, Khargone",
+    image: "/leadership/manager.jpg"
+  },
+  { sno: 4, name: "Rev. Sr. Teresa D'Souza", role: "Principal & Secretary, St. Jude's Hr. Sec. School, Khargone",
+    image: "/leadership/principal.jpg"
+  },
   { sno: 5, name: "Mr. Josheph Narayan", role: "Parent Representative" },
   { sno: 6, name: "Mrs. Zainab Lokhandwala", role: "Parent Representative" },
   { sno: 7, name: "Mrs. Nidhi Mark", role: "Teacher Representative" },
   { sno: 8, name: "Mrs. Prabha Kushwah", role: "Teacher Representative" },
   { sno: 9, name: "Mr. Joby Devassia", role: "Teacher Representative" },
-  { sno: 10, name: "Mr. Annu Bhai Patel", role: "Central Board Representative (Principal, Central School Khargone)" },
+  { sno: 10, name: "Mr. Annu Bhai Patel", role: "Central Board Representative (Principal, Central School Khargone)",
+    image: "/leadership/principal.jpg"
+  },
   { sno: 11, name: "Rev. Sr. Celine Lasrado", role: "School Representative, Khandwa" },
-  { sno: 12, name: "Rev. Sr. Victoria", role: "Central Board Representative (Principal, St. Pius Hr. Sec. School, Khandwa)" },
-  { sno: 13, name: "Rev. Leema Sheela Catherine", role: "Central Board Representative (Principal, St. Mary's Hr. Sec. School, Barwaha)" },
-  { sno: 14, name: "Mrs. Renu Rai", role: "Principal, Maharshi Vidhya Mandir, Khargone" }
+  { sno: 12, name: "Rev. Sr. Victoria", role: "Central Board Representative (Principal, St. Pius Hr. Sec. School, Khandwa)",
+    image: "/leadership/principal.jpg"
+  },
+  { sno: 13, name: "Rev. Leema Sheela Catherine", role: "Central Board Representative (Principal, St. Mary's Hr. Sec. School, Barwaha)",
+    image: "/leadership/principal.jpg"
+  },
+  { sno: 14, name: "Mrs. Renu Rai", role: "Principal, Maharshi Vidhya Mandir, Khargone",
+    image: "/leadership/principal.jpg"
+  }
 ];
 
 export const timingsData = {

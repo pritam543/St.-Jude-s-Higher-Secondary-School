@@ -1,125 +1,148 @@
-﻿import React, { useState } from "react";
-import { ScrollytellingChapter } from "./ScrollytellingEngine";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Quote, Users, Award } from "lucide-react";
+import { Quote, ChevronDown, ChevronUp } from "lucide-react";
 import { leadershipMessages, managingCommittee } from "../data/schoolData";
-import { Reveal, cinematicEase } from "./MotionPrimitives";
 
 export default function ManagementSection() {
   const [activeLeader, setActiveLeader] = useState(0);
 
+  const leaders = Array.isArray(leadershipMessages) ? leadershipMessages : [];
+
+  const getLeaderPhoto = (item) => {
+    if (item?.image) return item.image;
+    const label = ((item?.role || item?.designation || item?.title || "") + " " + (item?.name || "")).toLowerCase();
+    if (label.includes("president")) return "/leadership/president.jpg";
+    if (label.includes("principal")) return "/leadership/principal.jpg";
+    if (label.includes("manager")) return "/leadership/manager.jpg";
+    return null;
+  };
+
+  const current = leaders[activeLeader] || leaders[0];
+
   return (
-    <ScrollytellingChapter chapterLabel="Chapter II • Leadership & Governance" watermark="DIOCESE OF KHANDWA">
-      <motion.section id="management" className="py-24 bg-[#F6EBD9]" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
-      <div className="max-w-7xl mx-auto px-4 space-y-20">
-        <div>
-          <Reveal className="max-w-3xl mx-auto text-center space-y-3 mb-12">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#7A2021]">
-              Governance &amp; Guidance
-            </span>
-            <motion.h2 className="text-3xl sm:text-5xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 28, letterSpacing: "0.06em" }} whileInView={{ opacity: 1, y: 0, letterSpacing: "0.01em" }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
-              Messages From Leadership
-            </motion.h2>
-            <div className="w-24 h-1 bg-[#C59B27] mx-auto rounded-full" />
-          </Reveal>
-
-          <div className="flex flex-wrap justify-center gap-3 mb-8">
-            {leadershipMessages.map((leader, idx) => (
-              <button
-                key={leader.role}
-                onClick={() => setActiveLeader(idx)}
-                className={`relative px-6 py-3 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider transition cursor-pointer ${
-                  activeLeader === idx
-                    ? "text-[#F6EBD9]"
-                    : "bg-[#FCF7EE] text-[#7A2021] border border-[#7A2021]/20 hover:bg-[#E8D5B7]/60"
-                }`}
-              >
-                {activeLeader === idx && (
-                  <motion.span
-                    layoutId="leaderPill"
-                    transition={{ type: "spring", stiffness: 320, damping: 28 }}
-                    className="absolute inset-0 rounded-full bg-[#7A2021] border border-[#C59B27] shadow-lg"
-                  />
-                )}
-                <span className="relative z-10">{leader.role}</span>
-              </button>
-            ))}
-          </div>
-
-          <div className="max-w-4xl mx-auto bg-[#FCF7EE] rounded-3xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(122,32,33,0.18)] hover:border-[#C59B27] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(122,32,33,0.15)] p-8 sm:p-12 border-2 border-[#7A2021]/20 shadow-xl relative overflow-hidden">
-            <Quote className="w-12 h-12 text-[#C59B27]/30 absolute top-8 right-8" />
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeLeader}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.45, ease: cinematicEase }}
-              >
-                <span className="inline-block px-3.5 py-1 rounded-full bg-[#7A2021]/10 text-[#7A2021] text-xs font-bold uppercase tracking-widest mb-4">
-                  {leadershipMessages[activeLeader].role}
-                </span>
-                <p className="font-serif-editorial text-xl sm:text-2xl text-[#2B1615] leading-relaxed italic mb-8">
-                  &ldquo;{leadershipMessages[activeLeader].message}&rdquo;
-                </p>
-                <div className="border-t border-[#7A2021]/15 pt-5 flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[#7A2021] text-[#E5C158] flex items-center justify-center font-cinzel font-bold text-lg">
-                    {leadershipMessages[activeLeader].name.charAt(0)}
-                  </div>
-                  <div>
-                    <h4 className="font-cinzel text-lg font-bold text-[#7A2021]">
-                      {leadershipMessages[activeLeader].name}
-                    </h4>
-                    <p className="text-xs sm:text-sm text-[#5C3A38] font-medium">
-                      {leadershipMessages[activeLeader].designation}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+    <section id="leadership" className="py-16 sm:py-24 px-4 sm:px-8 bg-[#F6EBD9] text-[#2B1615] relative">
+      <div className="max-w-7xl mx-auto">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+          <span className="inline-block text-xs font-bold uppercase tracking-[0.3em] text-[#7A2021] mb-3">
+            Guiding Vision &amp; Legacy
+          </span>
+          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-[#2B1615]">
+            From the Leadership Desk
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#C59B27] to-transparent mx-auto mt-4" />
         </div>
 
-        <Reveal className="bg-[#FCF7EE] rounded-3xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(122,32,33,0.18)] hover:border-[#C59B27] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(122,32,33,0.15)] p-6 sm:p-10 border border-[#7A2021]/20 shadow-lg">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 border-b border-[#7A2021]/15 pb-6">
-            <div>
-              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#7A2021] mb-1">
-                <Users className="w-4 h-4 text-[#C59B27]" /> CBSE Bye-Laws Section 20 &amp; 21
+        {/* 3 Leadership Cards (President, Principal, Manager) */}
+        <div className="grid md:grid-cols-3 gap-6 sm:gap-8 mb-10">
+          {leaders.map((leader, idx) => {
+            const isSelected = activeLeader === idx;
+            const photoUrl = getLeaderPhoto(leader);
+
+            return (
+              <div
+                key={leader.id || leader.name || idx}
+                onClick={() => setActiveLeader(idx)}
+                className={`group rounded-3xl p-6 sm:p-7 transition-all duration-300 cursor-pointer border-2 flex flex-col justify-between ${
+                  isSelected
+                    ? "bg-[#541213] text-[#F6EBD9] border-[#E5C158] shadow-[0_18px_45px_rgba(84,18,19,0.28)] -translate-y-1"
+                    : "bg-[#FCF7EE] text-[#2B1615] border-[#C59B27]/40 hover:border-[#7A2021] shadow-md hover:shadow-xl"
+                }`}
+              >
+                <div>
+                  <div className="flex items-center gap-4 mb-5">
+                    {photoUrl && (
+                      <div className="w-20 h-20 sm:w-22 sm:h-22 rounded-full p-1 bg-gradient-to-tr from-[#8C6914] via-[#E5C158] to-[#C59B27] shadow-lg shrink-0">
+                        <img
+                          src={photoUrl}
+                          alt={leader.name || "School Leader"}
+                          className="w-full h-full object-cover object-top rounded-full border-2 border-[#FCF7EE]"
+                        />
+                      </div>
+                    )}
+                    <div>
+                      <span
+                        className={`inline-block text-[11px] font-bold uppercase tracking-[0.22em] mb-1 ${
+                          isSelected ? "text-[#E5C158]" : "text-[#7A2021]"
+                        }`}
+                      >
+                        {leader.role || leader.designation || leader.title}
+                      </span>
+                      <h3 className="font-cinzel text-lg sm:text-xl font-bold leading-snug">
+                        {leader.name}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <p
+                    className={`text-xs sm:text-sm leading-relaxed line-clamp-3 ${
+                      isSelected ? "text-[#F6EBD9]/85" : "text-[#4A2E2B]"
+                    }`}
+                  >
+                    {leader.quote || leader.excerpt || leader.message || leader.fullMessage}
+                  </p>
+                </div>
+
+                <div className="mt-5 pt-4 border-t border-[#C59B27]/25 flex items-center justify-between text-xs font-bold uppercase tracking-wider">
+                  <span className={isSelected ? "text-[#E5C158]" : "text-[#7A2021]"}>
+                    {isSelected ? "Reading Full Message" : "Read Full Message"}
+                  </span>
+                  {isSelected ? (
+                    <ChevronUp className="w-4 h-4 text-[#E5C158]" />
+                  ) : (
+                    <ChevronDown className="w-4 h-4 text-[#7A2021]" />
+                  )}
+                </div>
               </div>
-              <motion.h3 className="text-2xl sm:text-3xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>
-                Members of the Managing Committee
-              </motion.h3>
-            </div>
-            <span className="inline-flex items-center gap-2 bg-[#7A2021] text-[#F6EBD9] text-xs font-semibold px-4 py-2 rounded-full">
-              <Award className="w-4 h-4 text-[#E5C158]" /> 14 Esteemed Members
-            </span>
-          </div>
+            );
+          })}
+        </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="bg-[#7A2021] text-[#F6EBD9] text-xs uppercase tracking-wider">
-                  <th className="py-3.5 px-4 rounded-tl-xl">S.No.</th>
-                  <th className="py-3.5 px-4">Member Name</th>
-                  <th className="py-3.5 px-4 rounded-tr-xl">Designation / Representation</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#7A2021]/10 text-sm">
-                {managingCommittee.map((member) => (
-                  <tr key={member.sno} className="hover:bg-[#F6EBD9]/70 transition">
-                    <td className="py-3.5 px-4 font-bold text-[#7A2021]">{member.sno}</td>
-                    <td className="py-3.5 px-4 font-semibold text-[#2B1615]">{member.name}</td>
-                    <td className="py-3.5 px-4 text-[#5C3A38]">{member.role}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </Reveal>
+        {/* Expanded Full Message Box Directly Underneath the Cards */}
+        <AnimatePresence mode="wait">
+          {current && (
+            <motion.div
+              key={current.name || activeLeader}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35 }}
+              className="rounded-3xl bg-[#FCF7EE] border-2 border-[#C59B27] p-6 sm:p-10 shadow-xl relative overflow-hidden"
+            >
+              <Quote className="w-12 h-12 text-[#C59B27]/20 absolute top-6 right-6 pointer-events-none" />
+
+              <div className="flex flex-col sm:flex-row sm:items-center gap-5 pb-6 mb-6 border-b border-[#7A2021]/15">
+                {getLeaderPhoto(current) && (
+                  <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 bg-gradient-to-tr from-[#8C6914] via-[#E5C158] to-[#C59B27] shadow-lg shrink-0">
+                    <img
+                      src={getLeaderPhoto(current)}
+                      alt={current.name}
+                      className="w-full h-full object-cover object-top rounded-full border-2 border-[#FCF7EE]"
+                    />
+                  </div>
+                )}
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#7A2021]">
+                    {current.role || current.designation || current.title}
+                  </span>
+                  <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-[#2B1615] mt-1">
+                    {current.name}
+                  </h3>
+                  {current.qualification && (
+                    <p className="text-xs text-[#6B4B47] mt-1 font-medium">
+                      {current.qualification}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="text-sm sm:text-base text-[#3A201E] leading-relaxed whitespace-pre-line space-y-4">
+                {current.message || current.fullMessage || current.bio || current.quote}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </motion.section>
-      </ScrollytellingChapter>
-);
+    </section>
+  );
 }
-
-
