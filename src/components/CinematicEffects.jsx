@@ -1,4 +1,7 @@
-﻿import React, { useState, useEffect, useRef } from "react";
+﻿import React, { useState, useEffect, useRef, createContext, useContext } from "react";
+
+export const ShutterScrollContext = createContext(null);
+export const useShutterScroll = () => useContext(ShutterScrollContext);
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Award, ChevronsDown } from "lucide-react";
 
@@ -19,6 +22,7 @@ export function ScrollShutterStage({ children }) {
   const heroScale = useTransform(scrollYProgress, [0, 0.52], [1.08, 1]);
 
   return (
+    <ShutterScrollContext.Provider value={scrollYProgress}>
     <div ref={stageRef} className="relative h-[210vh]">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* Hero Section Underneath Shutter */}
@@ -75,6 +79,7 @@ export function ScrollShutterStage({ children }) {
         </motion.div>
       </div>
     </div>
+    </ShutterScrollContext.Provider>
   );
 }
 

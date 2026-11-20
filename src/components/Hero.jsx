@@ -3,9 +3,11 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Award, ArrowRight, BookOpen, FileText, Sparkles, Image as ImageIcon, ShieldCheck } from "lucide-react";
 import { schoolInfo } from "../data/schoolData";
 import { cinematicEase } from "./MotionPrimitives";
+import { useShutterScroll } from "./CinematicEffects";
 
 export default function Hero({ onOpenAdmission }) {
   const heroRef = useRef(null);
+  const shutterProgress = useShutterScroll();
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"]
@@ -15,6 +17,19 @@ export default function Hero({ onOpenAdmission }) {
   const bgScale = useTransform(scrollYProgress, [0, 1], [1.05, 1.18]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
   const contentY = useTransform(scrollYProgress, [0, 0.75], ["0%", "18%"]);
+
+  // 4-Corner Puzzle Assembly synchronized with Shutter opening (0.05 -> 0.50)
+  const activeProgress = shutterProgress || scrollYProgress;
+  const tlX = useTransform(activeProgress, [0.05, 0.5], ["-28%", "0%"]);
+  const tlY = useTransform(activeProgress, [0.05, 0.5], ["-28%", "0%"]);
+  const trX = useTransform(activeProgress, [0.05, 0.5], ["28%", "0%"]);
+  const trY = useTransform(activeProgress, [0.05, 0.5], ["-28%", "0%"]);
+  const blX = useTransform(activeProgress, [0.05, 0.5], ["-28%", "0%"]);
+  const blY = useTransform(activeProgress, [0.05, 0.5], ["28%", "0%"]);
+  const brX = useTransform(activeProgress, [0.05, 0.5], ["28%", "0%"]);
+  const brY = useTransform(activeProgress, [0.05, 0.5], ["28%", "0%"]);
+  const quadOpacity = useTransform(activeProgress, [0.04, 0.45], [0.25, 0.72]);
+
 
   return (
     <section
@@ -30,14 +45,53 @@ export default function Hero({ onOpenAdmission }) {
         transition={{ duration: 2.2, ease: cinematicEase }}
         className="absolute inset-0 z-0"
       >
-        <img
-          src="/school-building.jpg"
-          alt="St. Jude's Higher Secondary School Campus, Mangrul Road, Khargone"
-          className="w-full h-full object-cover object-center"
-          onError={(e) => {
-            e.currentTarget.style.display = "none";
-          }}
-        />
+        {/* 4-Corner Assembling School Image Quadrants (Slightly lower opacity for crisp foreground text) */}
+        <motion.div style={{ opacity: quadOpacity }} className="absolute inset-0 w-full h-full">
+          {/* Top-Left Quadrant */}
+          <motion.div
+            style={{
+              x: tlX,
+              y: tlY,
+              backgroundImage: 'url("/school-building.jpg")',
+              backgroundSize: "200% 200%",
+              backgroundPosition: "0% 0%"
+            }}
+            className="absolute top-0 left-0 w-1/2 h-1/2 bg-no-repeat will-change-transform"
+          />
+          {/* Top-Right Quadrant */}
+          <motion.div
+            style={{
+              x: trX,
+              y: trY,
+              backgroundImage: 'url("/school-building.jpg")',
+              backgroundSize: "200% 200%",
+              backgroundPosition: "100% 0%"
+            }}
+            className="absolute top-0 right-0 w-1/2 h-1/2 bg-no-repeat will-change-transform"
+          />
+          {/* Bottom-Left Quadrant */}
+          <motion.div
+            style={{
+              x: blX,
+              y: blY,
+              backgroundImage: 'url("/school-building.jpg")',
+              backgroundSize: "200% 200%",
+              backgroundPosition: "0% 100%"
+            }}
+            className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-no-repeat will-change-transform"
+          />
+          {/* Bottom-Right Quadrant */}
+          <motion.div
+            style={{
+              x: brX,
+              y: brY,
+              backgroundImage: 'url("/school-building.jpg")',
+              backgroundSize: "200% 200%",
+              backgroundPosition: "100% 100%"
+            }}
+            className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-no-repeat will-change-transform"
+          />
+        </motion.div>
         {/* Luxury Heritage Maroon & Dark Vignette Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#1A0405]/55 via-[#240708]/30 to-[#1A0405]/75" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_45%,#1A0405_100%)] opacity-45" />
