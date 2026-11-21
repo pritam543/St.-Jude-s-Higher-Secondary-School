@@ -52,7 +52,7 @@ export function ScrollytellingChapter({ children, chapterLabel = "", watermark =
           transition={{ duration: 0.75, ease: cinemaCurve }}
           className="max-w-7xl mx-auto px-4 pt-8 -mb-14 relative z-20"
         >
-          <span className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.32em] text-[#7A2021]/75 bg-[#FCF7EE]/85 backdrop-blur-sm border border-[#C59B27]/40 px-3.5 py-1 rounded-full shadow-xs">
+          <span className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.32em] text-[#7A2021]/75 bg-transparent backdrop-blur-sm border border-[#C59B27]/40 px-3.5 py-1 rounded-full shadow-xs">
             <span className="w-1.5 h-1.5 rounded-full bg-[#C59B27] animate-pulse" />
             {chapterLabel}
           </span>

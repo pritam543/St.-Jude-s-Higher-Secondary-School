@@ -7,7 +7,7 @@ import AboutSection from "./components/AboutSection";
 import CampusSections from "./components/CampusSections";
 import PortalAndFooter from "./components/PortalAndFooter";
 import ShowcasePage from "./components/ShowcasePage";
-import { ScrollProgressBar } from "./components/MotionPrimitives";
+import { ScrollProgressBar, SchoolScrollBackdrop } from "./components/MotionPrimitives";
 import { ScrollShutterStage, GoldenAtmosphere } from "./components/CinematicEffects";
 
 export default function App() {
@@ -84,12 +84,19 @@ export default function App() {
               <ScrollShutterStage>
                 <Hero onOpenAdmission={() => setAdmissionOpen(true)} />
               </ScrollShutterStage>
-              <AboutSection />
-              <CampusSections onOpenAdmission={() => setAdmissionOpen(true)} />
-              <PortalAndFooter
-                admissionOpen={admissionOpen}
-                onCloseAdmission={() => setAdmissionOpen(false)}
-              />
+
+              {/* Unified School-Themed 3D Scroll Backdrop strictly between Hero & Footer */}
+              <div className="relative">
+                <SchoolScrollBackdrop />
+                <div className="relative z-[2]">
+                  <AboutSection />
+                  <CampusSections onOpenAdmission={() => setAdmissionOpen(true)} />
+                  <PortalAndFooter
+                    admissionOpen={admissionOpen}
+                    onCloseAdmission={() => setAdmissionOpen(false)}
+                  />
+                </div>
+              </div>
             </main>
           </>
         )}
