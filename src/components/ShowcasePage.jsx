@@ -4,6 +4,7 @@ import { ArrowLeft, Sparkles, RotateCcw, MapPin, Phone, Mail, ExternalLink } fro
 import Navbar from "./Navbar";
 import ManagementSection from "./ManagementSection";
 import ArchivalGallerySection from "./ArchivalGallerySection";
+import { Showcase3DBackdrop } from "./MotionPrimitives";
 
 const royalClothEase = [0.19, 1, 0.22, 1];
 
@@ -103,10 +104,13 @@ export default function ShowcasePage({ onBack, initialSection = "leadership" }) 
         </div>
       </div>
 
-      {/* Main Page Content Behind Curtains */}
+      {/* Main Page Content Behind Curtains with Distinct 3D Rubilume Stage & Archival Backdrop */}
       <main className="relative z-30 flex-grow pointer-events-auto">
-        <ManagementSection />
-        <ArchivalGallerySection />
+        <Showcase3DBackdrop />
+        <div className="relative z-10">
+          <ManagementSection />
+          <ArchivalGallerySection />
+        </div>
       </main>
 
       {/* HERITAGE FOOTER WITH INSTAGRAM & YOUTUBE CONNECT */}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Quote, ChevronDown, ChevronUp } from "lucide-react";
+import { Scroll3DCard } from "./MotionPrimitives";
 import { leadershipMessages, managingCommittee } from "../data/schoolData";
 
 export default function ManagementSection() {
@@ -20,7 +21,7 @@ export default function ManagementSection() {
   const current = leaders[activeLeader] || leaders[0];
 
   return (
-    <section id="leadership" className="py-16 sm:py-24 px-4 sm:px-8 bg-[#F6EBD9] text-[#2B1615] relative">
+    <section id="leadership" className="py-16 sm:py-24 px-4 sm:px-8 bg-[#F6EBD9]/42 text-[#2B1615] relative">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
@@ -40,8 +41,8 @@ export default function ManagementSection() {
             const photoUrl = getLeaderPhoto(leader);
 
             return (
+              <Scroll3DCard key={leader.id || leader.name || idx} direction={idx === 0 ? "left" : idx === 1 ? "center" : "right"}>
               <div
-                key={leader.id || leader.name || idx}
                 onClick={() => setActiveLeader(idx)}
                 className={`group rounded-3xl p-6 sm:p-7 transition-all duration-300 cursor-pointer border-2 flex flex-col justify-between ${
                   isSelected
@@ -94,6 +95,7 @@ export default function ManagementSection() {
                   )}
                 </div>
               </div>
+              </Scroll3DCard>
             );
           })}
         </div>

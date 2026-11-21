@@ -124,7 +124,7 @@ export default function ArchivalGallerySection() {
 
   return (
     <>
-      <motion.section id="gallery" className="py-24 bg-[#FCF7EE] border-y border-[#7A2021]/15 overflow-hidden" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
+      <motion.section id="gallery" className="py-24 bg-[#FCF7EE]/42 border-y border-[#7A2021]/15 overflow-hidden" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
         <div className="max-w-7xl mx-auto px-4 space-y-12">
           <div className="max-w-3xl mx-auto text-center space-y-3">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#7A2021]">
@@ -148,7 +148,7 @@ export default function ArchivalGallerySection() {
               className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition cursor-pointer ${
                 selectedAlbum === null
                   ? "bg-[#7A2021] text-[#F6EBD9] border border-[#C59B27] shadow-md"
-                  : "bg-[#F6EBD9] text-[#7A2021] border border-[#7A2021]/20 hover:bg-[#E8D5B7]"
+                  : "bg-[#F6EBD9]/42 text-[#7A2021] border border-[#7A2021]/20 hover:bg-[#E8D5B7]"
               }`}
             >
               <FolderOpen className="w-3.5 h-3.5 text-[#C59B27]" />
@@ -162,7 +162,7 @@ export default function ArchivalGallerySection() {
                 className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition cursor-pointer ${
                   selectedAlbum === alb.key
                     ? "bg-[#7A2021] text-[#F6EBD9] border border-[#C59B27] shadow-md"
-                    : "bg-[#F6EBD9] text-[#7A2021] border border-[#7A2021]/20 hover:bg-[#E8D5B7]"
+                    : "bg-[#F6EBD9]/42 text-[#7A2021] border border-[#7A2021]/20 hover:bg-[#E8D5B7]"
                 }`}
               >
                 {alb.label} ({alb.count})
@@ -233,7 +233,7 @@ export default function ArchivalGallerySection() {
                 className="space-y-8"
               >
                 {/* Album Header Bar with Back Button */}
-                <div className="flex flex-wrap items-center justify-between gap-4 bg-[#F6EBD9] px-6 py-4 rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl border border-[#7A2021]/20">
+                <div className="flex flex-wrap items-center justify-between gap-4 bg-[#F6EBD9]/42 px-6 py-4 rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl border border-[#7A2021]/20">
                   <button
                     onClick={() => setSelectedAlbum(null)}
                     className="inline-flex items-center gap-2 bg-[#7A2021] hover:bg-[#541213] text-[#F6EBD9] px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider shadow transition cursor-pointer"

@@ -418,3 +418,140 @@ export function SchoolScrollBackdrop() {
     </div>
   );
 }
+
+export function Showcase3DBackdrop() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  const smooth = useSpring(scrollYProgress, {
+    stiffness: 85,
+    damping: 22,
+    mass: 0.5,
+    restDelta: 0.0005
+  });
+
+  const stageOpacity = useTransform(smooth, [0, 0.9, 1], [1, 1, 0]);
+
+  // Stage 1: Royal Golden Stage Spotlights & Laurel Medallion
+  const beamRotateLeft = useTransform(smooth, [0, 0.5, 1], [-18, 14, -14]);
+  const beamRotateRight = useTransform(smooth, [0, 0.5, 1], [18, -14, 14]);
+  const medallionSpin = useTransform(smooth, [0, 1], [0, 360]);
+  const medallionScale = useTransform(smooth, [0, 0.4, 0.8, 1], [0.95, 1.22, 0.92, 1.12]);
+
+  // Stage 2: Floating 3D Archival Photo Frames sweeping across Gallery Section
+  const frame1X = useTransform(smooth, [0.1, 0.52, 1], ["-32vw", "16vw", "38vw"]);
+  const frame1Y = useTransform(smooth, [0.1, 0.52, 1], ["-18vh", "10vh", "28vh"]);
+  const frame1Rotate = useTransform(smooth, [0.1, 1], [-22, 30]);
+
+  const frame2X = useTransform(smooth, [0.2, 0.62, 1], ["35vw", "-15vw", "-36vw"]);
+  const frame2Y = useTransform(smooth, [0.2, 0.62, 1], ["22vh", "-8vh", "-26vh"]);
+  const frame2Rotate = useTransform(smooth, [0.2, 1], [24, -26]);
+
+  const crownY = useTransform(smooth, [0, 0.5, 1], ["-12vh", "14vh", "-10vh"]);
+
+  return (
+    <div
+      ref={containerRef}
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 z-0"
+    >
+      <motion.div
+        style={{ opacity: stageOpacity, perspective: 1100 }}
+        className="fixed inset-0 pointer-events-none overflow-hidden flex items-center justify-center z-0"
+      >
+        {/* Rich Royal Gold & Maroon Stage Aura */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,rgba(197,155,39,0.38),rgba(122,32,33,0.14)_56%,transparent_84%)]" />
+
+        {/* Highlighted Golden Stage Spotlight Beams */}
+        <motion.div
+          style={{
+            rotate: beamRotateLeft,
+            transformOrigin: "top center",
+            willChange: "transform"
+          }}
+          className="absolute -top-20 left-[14%] w-72 sm:w-[440px] h-[125vh] bg-gradient-to-b from-[#C59B27]/36 via-[#E5C158]/16 to-transparent blur-2xl"
+        />
+        <motion.div
+          style={{
+            rotate: beamRotateRight,
+            transformOrigin: "top center",
+            willChange: "transform"
+          }}
+          className="absolute -top-20 right-[14%] w-72 sm:w-[440px] h-[125vh] bg-gradient-to-b from-[#7A2021]/30 via-[#C59B27]/18 to-transparent blur-2xl"
+        />
+
+        {/* Highlighted Central 3D Diamond & Octagon Royal Rubilume Crest */}
+        <motion.div
+          style={{
+            rotateZ: medallionSpin,
+            rotateX: 35,
+            scale: medallionScale,
+            transformStyle: "preserve-3d",
+            willChange: "transform"
+          }}
+          className="w-[380px] h-[380px] sm:w-[600px] sm:h-[600px] rounded-[3.5rem] border-[3px] border-[#C59B27]/75 shadow-[0_0_100px_rgba(197,155,39,0.42)] flex items-center justify-center"
+        >
+          <div className="w-[78%] h-[78%] rounded-[2.5rem] border-[3px] border-dashed border-[#7A2021]/60 rotate-45" />
+        </motion.div>
+
+        {/* Highlighted Royal Laurel Wreath & Crown Crest */}
+        <motion.div
+          style={{ y: crownY, scale: medallionScale, willChange: "transform" }}
+          className="absolute top-[15%] text-[#7A2021]/45 drop-shadow-[0_10px_25px_rgba(197,155,39,0.35)]"
+        >
+          <svg viewBox="0 0 120 80" className="w-44 sm:w-64 h-auto" fill="none" stroke="currentColor" strokeWidth="2.8">
+            <path d="M24 62 C12 48, 12 26, 28 14" />
+            <path d="M96 62 C108 48, 108 26, 92 14" />
+            <path d="M40 48 L46 28 L60 38 L74 28 L80 48 Z" fill="rgba(197,155,39,0.35)" />
+            <circle cx="60" cy="20" r="3.5" fill="currentColor" />
+          </svg>
+        </motion.div>
+
+        {/* Highlighted 3D Floating Archival Photo Frame 1 */}
+        <motion.div
+          style={{
+            x: frame1X,
+            y: frame1Y,
+            rotateZ: frame1Rotate,
+            rotateY: frame1Rotate,
+            transformStyle: "preserve-3d",
+            willChange: "transform"
+          }}
+          className="absolute w-40 h-48 sm:w-52 sm:h-60 rounded-2xl bg-[#FCF7EE]/85 border-[2.5px] border-[#C59B27]/85 p-3 shadow-[0_22px_50px_rgba(122,32,33,0.28)] flex flex-col justify-between"
+        >
+          <div className="w-full h-3/4 rounded-xl bg-gradient-to-br from-[#7A2021]/30 via-[#C59B27]/35 to-[#541213]/30 border border-[#C59B27]/60 flex items-center justify-center">
+            <svg viewBox="0 0 48 48" className="w-12 h-12 text-[#7A2021]/70" fill="none" stroke="currentColor" strokeWidth="2.4">
+              <rect x="6" y="10" width="36" height="28" rx="4" />
+              <circle cx="17" cy="20" r="3" />
+              <path d="M8 34 L19 24 L28 31 L34 26 L40 34" />
+            </svg>
+          </div>
+          <div className="h-2.5 w-2/3 rounded-full bg-[#7A2021]/45 mx-auto" />
+        </motion.div>
+
+        {/* Highlighted 3D Floating Archival Photo Frame 2 */}
+        <motion.div
+          style={{
+            x: frame2X,
+            y: frame2Y,
+            rotateZ: frame2Rotate,
+            rotateX: frame2Rotate,
+            transformStyle: "preserve-3d",
+            willChange: "transform"
+          }}
+          className="absolute w-40 h-48 sm:w-52 sm:h-60 rounded-2xl bg-[#FCF7EE]/85 border-[2.5px] border-[#7A2021]/70 p-3 shadow-[0_22px_50px_rgba(197,155,39,0.32)] flex flex-col justify-between"
+        >
+          <div className="w-full h-3/4 rounded-xl bg-gradient-to-tr from-[#C59B27]/35 via-[#7A2021]/28 to-[#E5C158]/35 border border-[#7A2021]/50 flex items-center justify-center">
+            <svg viewBox="0 0 48 48" className="w-12 h-12 text-[#7A2021]/70" fill="none" stroke="currentColor" strokeWidth="2.4">
+              <path d="M24 8 L28 18 L39 19 L31 26 L33 37 L24 31 L15 37 L17 26 L9 19 L20 18 Z" />
+            </svg>
+          </div>
+          <div className="h-2.5 w-1/2 rounded-full bg-[#C59B27]/70 mx-auto" />
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+}
