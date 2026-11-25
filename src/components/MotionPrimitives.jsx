@@ -151,23 +151,26 @@ export function Scroll3DCard({ children, className = "", direction = "center" })
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 98%", "center 55%"]
+    offset: ["start 98%", "end 12%"]
   });
 
+  // High-frequency 120fps spring tuning (zero lag, immediate GPU tracking)
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 110,
-    damping: 22,
-    mass: 0.45,
-    restDelta: 0.0005
+    stiffness: 190,
+    damping: 24,
+    mass: 0.25,
+    restDelta: 0.0001
   });
 
-  const initialRotateY = direction === "left" ? 14 : direction === "right" ? -14 : 0;
-  const rotateX = useTransform(smoothProgress, [0, 1], [18, 0]);
-  const rotateY = useTransform(smoothProgress, [0, 1], [initialRotateY, 0]);
-  const z = useTransform(smoothProgress, [0, 1], [-90, 0]);
-  const y = useTransform(smoothProgress, [0, 1], [48, 0]);
-  const scale = useTransform(smoothProgress, [0, 1], [0.91, 1]);
-  const opacity = useTransform(smoothProgress, [0, 0.25, 1], [0.2, 0.92, 1]);
+  const sign = direction === "left" ? 1 : direction === "right" ? -1 : 0;
+
+  // Continuous 3D movement across the entire scroll pass (entry -> center -> exit)
+  const rotateX = useTransform(smoothProgress, [0, 0.42, 0.65, 1], [18, 0, 0, -10]);
+  const rotateY = useTransform(smoothProgress, [0, 0.42, 0.65, 1], [sign * 14, 0, 0, sign * -8]);
+  const z = useTransform(smoothProgress, [0, 0.42, 0.65, 1], [-85, 12, 12, -45]);
+  const y = useTransform(smoothProgress, [0, 0.42, 0.65, 1], [44, 0, 0, -24]);
+  const scale = useTransform(smoothProgress, [0, 0.42, 0.65, 1], [0.91, 1.01, 1.01, 0.96]);
+  const opacity = useTransform(smoothProgress, [0, 0.22, 0.85, 1], [0.25, 1, 1, 0.75]);
 
   return (
     <div ref={ref} style={{ perspective: 1200 }} className={`h-full w-full ${className}`}>
@@ -180,6 +183,7 @@ export function Scroll3DCard({ children, className = "", direction = "center" })
           scale,
           opacity,
           transformStyle: "preserve-3d",
+          backfaceVisibility: "hidden",
           willChange: "transform, opacity"
         }}
         className="h-full w-full"
@@ -194,28 +198,69 @@ export function Scroll3DPanel({ children, className = "", wrapperClassName = "" 
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 96%", "center 55%"]
+    offset: ["start 98%", "end 12%"]
   });
 
   const smooth = useSpring(scrollYProgress, {
-    stiffness: 105,
-    damping: 22,
-    mass: 0.45,
-    restDelta: 0.0005
+    stiffness: 185,
+    damping: 24,
+    mass: 0.25,
+    restDelta: 0.0001
   });
 
-  const rotateX = useTransform(smooth, [0, 1], [15, 0]);
-  const scale = useTransform(smooth, [0, 1], [0.92, 1]);
-  const y = useTransform(smooth, [0, 1], [46, 0]);
-  const opacity = useTransform(smooth, [0, 0.25, 1], [0.25, 0.94, 1]);
+  const rotateX = useTransform(smooth, [0, 0.42, 0.68, 1], [14, 0, 0, -8]);
+  const z = useTransform(smooth, [0, 0.42, 0.68, 1], [-70, 10, 10, -35]);
+  const scale = useTransform(smooth, [0, 0.42, 0.68, 1], [0.93, 1.01, 1.01, 0.97]);
+  const y = useTransform(smooth, [0, 0.42, 0.68, 1], [40, 0, 0, -20]);
+  const opacity = useTransform(smooth, [0, 0.22, 0.88, 1], [0.3, 1, 1, 0.8]);
 
   return (
     <div ref={ref} style={{ perspective: 1400 }} className={`w-full ${wrapperClassName}`}>
       <motion.div
         style={{
           rotateX,
+          z,
           scale,
           y,
+          opacity,
+          transformStyle: "preserve-3d",
+          backfaceVisibility: "hidden",
+          willChange: "transform, opacity"
+        }}
+        className={className}
+      >
+        {children}
+      </motion.div>
+    </div>
+  );
+}
+
+export function Scroll3DHeading({ children, className = "" }) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 98%", "center 45%"]
+  });
+
+  const smooth = useSpring(scrollYProgress, {
+    stiffness: 200,
+    damping: 24,
+    mass: 0.22,
+    restDelta: 0.0001
+  });
+
+  const rotateX = useTransform(smooth, [0, 1], [24, 0]);
+  const y = useTransform(smooth, [0, 1], [32, 0]);
+  const scale = useTransform(smooth, [0, 1], [0.92, 1]);
+  const opacity = useTransform(smooth, [0, 0.35, 1], [0.2, 0.95, 1]);
+
+  return (
+    <div ref={ref} style={{ perspective: 1000 }} className="w-full">
+      <motion.div
+        style={{
+          rotateX,
+          y,
+          scale,
           opacity,
           transformStyle: "preserve-3d",
           willChange: "transform, opacity"
@@ -427,10 +472,10 @@ export function Showcase3DBackdrop() {
   });
 
   const smooth = useSpring(scrollYProgress, {
-    stiffness: 85,
-    damping: 22,
-    mass: 0.5,
-    restDelta: 0.0005
+    stiffness: 185,
+    damping: 24,
+    mass: 0.25,
+    restDelta: 0.0001
   });
 
   const stageOpacity = useTransform(smooth, [0, 0.9, 1], [1, 1, 0]);

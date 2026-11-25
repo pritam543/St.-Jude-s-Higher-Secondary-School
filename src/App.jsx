@@ -18,9 +18,11 @@ export default function App() {
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.35,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true
+      duration: 0.95,
+      easing: (t) => 1 - Math.pow(1 - t, 4),
+      smoothWheel: true,
+      wheelMultiplier: 1.05,
+      touchMultiplier: 1.5
     });
 
     function raf(time) {

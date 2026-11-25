@@ -1,5 +1,6 @@
 ﻿import React, { useState, useMemo } from "react";
 import { ScrollytellingChapter } from "./ScrollytellingEngine";
+import { Scroll3DCard, Scroll3DPanel, Scroll3DHeading } from "./MotionPrimitives";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FileCheck2,
@@ -126,7 +127,7 @@ export default function ArchivalGallerySection() {
     <>
       <motion.section id="gallery" className="py-24 bg-[#FCF7EE]/42 border-y border-[#7A2021]/15 overflow-hidden" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
         <div className="max-w-7xl mx-auto px-4 space-y-12">
-          <div className="max-w-3xl mx-auto text-center space-y-3">
+          <Scroll3DHeading className="max-w-3xl mx-auto text-center space-y-3">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#7A2021]">
               Campus Life &amp; Chronicles • {allPhotos.length} Archival Photos
             </span>
@@ -139,7 +140,7 @@ export default function ArchivalGallerySection() {
                 ? `Exploring ${activeAlbumData?.label} (${activeAlbumData?.count} Photos)`
                 : "Select a category album below to explore campus memories"}
             </p>
-          </div>
+          </Scroll3DHeading>
 
           {/* Quick Category Navigation Bar */}
           <div className="flex flex-wrap justify-center gap-2.5">

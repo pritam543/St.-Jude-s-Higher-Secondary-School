@@ -1,4 +1,5 @@
 ﻿import React, { useState, useMemo } from "react";
+import { Scroll3DPanel, Scroll3DHeading } from "./MotionPrimitives";
 import { ScrollytellingChapter } from "./ScrollytellingEngine";
 import { motion, AnimatePresence } from "framer-motion";
 import {

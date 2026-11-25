@@ -18,7 +18,7 @@ import {
   infrastructureSpecs,
   academicsStreams
 } from "../data/schoolData";
-import { Reveal, StaggerContainer, StaggerItem, cinematicEase, Card3D, Scroll3DCard, Scroll3DPanel } from "./MotionPrimitives";
+import { Reveal, StaggerContainer, StaggerItem, cinematicEase, Card3D, Scroll3DCard, Scroll3DPanel, Scroll3DHeading } from "./MotionPrimitives";
 
 export default function CampusSections({ onOpenAdmission }) {
   const [season, setSeason] = useState("summer");
@@ -28,7 +28,7 @@ export default function CampusSections({ onOpenAdmission }) {
       <>
       <motion.section id="admission" className="py-24 bg-[#FCF7EE]/52 border-y border-[#7A2021]/15 overflow-hidden" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
         <div className="max-w-7xl mx-auto px-4 space-y-16">
-          <Reveal direction="up" className="max-w-3xl mx-auto text-center space-y-3">
+          <Scroll3DHeading className="max-w-3xl mx-auto text-center space-y-3">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#7A2021]">
               Enroll &amp; Daily Schedule
             </span>
@@ -36,7 +36,7 @@ export default function CampusSections({ onOpenAdmission }) {
               Admissions &amp; School Timings
             </motion.h2>
             <div className="w-24 h-1 bg-[#C59B27] mx-auto rounded-full" />
-          </Reveal>
+          </Scroll3DHeading>
 
           <div className="grid lg:grid-cols-12 gap-10 items-stretch">
             <Scroll3DCard direction="left" className="lg:col-span-5">
@@ -171,7 +171,7 @@ export default function CampusSections({ onOpenAdmission }) {
       <motion.section id="facilities" className="py-24 bg-[#F6EBD9]/52 overflow-hidden" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
         <div className="max-w-7xl mx-auto px-4 space-y-20">
           <div>
-            <Reveal direction="up" className="max-w-3xl mx-auto text-center space-y-3 mb-14">
+            <Scroll3DHeading className="max-w-3xl mx-auto text-center space-y-3 mb-14">
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#7A2021]">
                 Modern Learning Ecosystem
               </span>
@@ -179,7 +179,7 @@ export default function CampusSections({ onOpenAdmission }) {
                 World-Class Facilities
               </motion.h2>
               <div className="w-24 h-1 bg-[#C59B27] mx-auto rounded-full" />
-            </Reveal>
+            </Scroll3DHeading>
 
             <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
               {facilitiesList.map((fac, idx) => (
@@ -235,7 +235,7 @@ export default function CampusSections({ onOpenAdmission }) {
 
       <motion.section id="academics" className="py-24 bg-[#FCF7EE]/52 border-t border-[#7A2021]/15 overflow-hidden" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
         <div className="max-w-7xl mx-auto px-4 space-y-14">
-          <Reveal direction="up" className="max-w-3xl mx-auto text-center space-y-3">
+          <Scroll3DHeading className="max-w-3xl mx-auto text-center space-y-3">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#7A2021]">
               CBSE Curriculum &amp; Excellence
             </span>
@@ -243,7 +243,7 @@ export default function CampusSections({ onOpenAdmission }) {
               Academics &amp; Board Toppers
             </motion.h2>
             <div className="w-24 h-1 bg-[#C59B27] mx-auto rounded-full" />
-          </Reveal>
+          </Scroll3DHeading>
 
           <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {academicsStreams.map((stream, idx) => (

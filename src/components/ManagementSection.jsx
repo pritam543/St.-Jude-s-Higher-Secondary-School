@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Quote, ChevronDown, ChevronUp } from "lucide-react";
-import { Scroll3DCard } from "./MotionPrimitives";
+import { Scroll3DCard, Scroll3DHeading } from "./MotionPrimitives";
 import { leadershipMessages, managingCommittee } from "../data/schoolData";
 
 export default function ManagementSection() {

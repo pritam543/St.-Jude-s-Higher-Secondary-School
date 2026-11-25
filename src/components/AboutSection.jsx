@@ -3,14 +3,14 @@ import { ScrollytellingChapter } from "./ScrollytellingEngine";
 import { motion } from "framer-motion";
 import { Compass, Eye, HeartHandshake, Sparkles, Landmark } from "lucide-react";
 import { schoolInfo, historyTimeline } from "../data/schoolData";
-import { Reveal, StaggerContainer, StaggerItem, Card3D, Scroll3DCard, Scroll3DPanel } from "./MotionPrimitives";
+import { Reveal, StaggerContainer, StaggerItem, Card3D, Scroll3DCard, Scroll3DPanel, Scroll3DHeading } from "./MotionPrimitives";
 
 export default function AboutSection() {
   return (
     <ScrollytellingChapter chapterLabel="Chapter I • Heritage & Legacy" watermark="EST. 1985 • NIMAR">
       <motion.section id="about" className="py-24 bg-[#FCF7EE]/52 border-y border-[#7A2021]/15 overflow-hidden" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
       <div className="max-w-7xl mx-auto px-4 space-y-20">
-        <Reveal direction="up" className="max-w-3xl mx-auto text-center space-y-4">
+        <Scroll3DHeading className="max-w-3xl mx-auto text-center space-y-4">
           <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#7A2021]">
             Our Heritage &amp; Legacy
           </span>
@@ -22,7 +22,7 @@ export default function AboutSection() {
             Operated by the <strong className="text-[#7A2021]">Catholic Diocese of Khandwa (Registered)</strong> under the chairmanship of{" "}
             <strong className="text-[#7A2021]">Most Rev. Augustine Madathikunnel</strong>, Bishop of Khandwa, St. Jude&apos;s embraces students of all backgrounds without regard to caste, creed, or religion.
           </p>
-        </Reveal>
+        </Scroll3DHeading>
 
         <div className="grid md:grid-cols-3 gap-8">
           <Scroll3DCard direction="left">
