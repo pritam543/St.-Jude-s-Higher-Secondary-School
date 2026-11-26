@@ -7,6 +7,7 @@ import AboutSection from "./components/AboutSection";
 import CampusSections from "./components/CampusSections";
 import PortalAndFooter from "./components/PortalAndFooter";
 import ShowcasePage from "./components/ShowcasePage";
+import CompliancePortalPage from "./components/CompliancePortalPage";
 import { ScrollProgressBar, SchoolScrollBackdrop } from "./components/MotionPrimitives";
 import { ScrollShutterStage, GoldenAtmosphere } from "./components/CinematicEffects";
 
@@ -15,6 +16,7 @@ export default function App() {
   const [showNavbar, setShowNavbar] = useState(false);
   const [activePage, setActivePage] = useState("home");
   const [showcaseTarget, setShowcaseTarget] = useState("leadership");
+  const [complianceSection, setComplianceSection] = useState("tc");
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -37,9 +39,13 @@ export default function App() {
     };
 
     const handleHashChange = () => {
-      const hash = window.location.hash;
+      const hash = window.location.hash.toLowerCase();
       if (hash === "#management" || hash === "#gallery" || hash === "#showcase") {
+        setShowcaseTarget(hash === "#gallery" ? "gallery" : "leadership");
         setActivePage("showcase");
+      } else if (hash === "#tc" || hash === "#disclosure") {
+        setComplianceSection(hash === "#disclosure" ? "disclosure" : "tc");
+        setActivePage("compliance");
       } else {
         setActivePage("home");
       }
@@ -59,8 +65,40 @@ export default function App() {
   }, []);
 
   const goHome = () => {
-    window.location.hash = "#home";
+    window.history.pushState(null, "", "#home");
     setActivePage("home");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const navigateToHash = (hash) => {
+    const cleanHash = hash.toLowerCase();
+    window.history.pushState(null, "", cleanHash);
+    if (cleanHash === "#management" || cleanHash === "#gallery" || cleanHash === "#showcase") {
+      setShowcaseTarget(cleanHash === "#gallery" ? "gallery" : "leadership");
+      setActivePage("showcase");
+    } else if (cleanHash === "#tc" || cleanHash === "#disclosure") {
+      const sec = cleanHash === "#disclosure" ? "disclosure" : "tc";
+      setComplianceSection(sec);
+      setActivePage("compliance");
+      setTimeout(() => {
+        const el = document.getElementById(sec);
+        if (el) {
+          const y = el.getBoundingClientRect().top + window.scrollY - 145;
+          window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+        }
+      }, 120);
+    } else {
+      setActivePage("home");
+      setTimeout(() => {
+        const targetId = cleanHash.replace("#", "");
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }, 100);
+    }
   };
 
   return (
@@ -69,7 +107,14 @@ export default function App() {
         <GoldenAtmosphere />
         <ScrollProgressBar />
 
-        {activePage === "showcase" ? (
+        {activePage === "compliance" ? (
+          <CompliancePortalPage
+            onBackHome={goHome}
+            onNavigate={navigateToHash}
+            onOpenAdmission={() => setAdmissionOpen(true)}
+            initialSection={complianceSection}
+          />
+        ) : activePage === "showcase" ? (
           <div id="showcase-interactive-root" className="relative z-50 min-h-screen pointer-events-auto bg-[#F6EBD9]"><ShowcasePage
             onBackHome={goHome}
             onOpenAdmission={() => setAdmissionOpen(true)}
@@ -79,6 +124,7 @@ export default function App() {
           <>
             <Navbar
               onOpenAdmission={() => setAdmissionOpen(true)}
+              onNavigate={navigateToHash}
               showMainNav={showNavbar}
             />
 

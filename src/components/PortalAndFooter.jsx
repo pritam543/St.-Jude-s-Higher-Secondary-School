@@ -124,76 +124,7 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
   return (
     <ScrollytellingChapter chapterLabel="Chapter IV • Portal & Admissions" watermark="ST. JUDE'S KHARGONE">
       <>
-        {/* TRANSFER CERTIFICATE (TC) VERIFICATION SECTION */}
-        <motion.section id="tc" className="py-24 bg-[#F6EBD9]/52" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
-          <div className="max-w-5xl mx-auto px-4 space-y-10">
-            <div className="text-center space-y-3">
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#7A2021]">
-                CBSE Digital Verification
-              </span>
-              <motion.h2 className="text-3xl sm:text-5xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 28, letterSpacing: "0.06em" }} whileInView={{ opacity: 1, y: 0, letterSpacing: "0.01em" }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
-                Transfer Certificate (TC) Portal
-              </motion.h2>
-              <div className="w-24 h-1 bg-[#C59B27] mx-auto rounded-full" />
-              <p className="text-sm sm:text-base text-[#5C3A38] max-w-2xl mx-auto">
-                Verify issued Transfer Certificates online using Admission Number or TC Serial Number as per CBSE Affiliation guidelines.
-              </p>
-            </div>
 
-            <div className="bg-[#FCF7EE] p-8 sm:p-10 rounded-3xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(122,32,33,0.18)] hover:border-[#C59B27] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(122,32,33,0.15)] border-2 border-[#7A2021]/20 shadow-xl space-y-6">
-              <form onSubmit={handleTcSearch} className="flex flex-col sm:flex-row gap-4">
-                <div className="relative flex-1">
-                  <Search className="w-5 h-5 text-[#7A2021] absolute left-4 top-1/2 -translate-y-1/2" />
-                  <input
-                    type="text"
-                    value={tcQuery}
-                    onChange={(e) => setTcQuery(e.target.value)}
-                    placeholder="Enter TC No. (e.g., SJHS/2025/1042) or Admission No. (e.g., 4892)"
-                    className="w-full pl-12 pr-4 py-4 rounded-full bg-[#F6EBD9] border border-[#7A2021]/25 text-sm text-[#2B1615] focus:outline-none focus:border-[#7A2021]"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="bg-[#7A2021] hover:bg-[#541213] text-[#F6EBD9] px-8 py-4 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider shadow-md transition cursor-pointer"
-                >
-                  Verify TC
-                </button>
-              </form>
-
-              {tcResult && (
-                <div
-                  className={`p-5 rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl border ${tcResult.found
-                      ? "bg-emerald-950/5 border-emerald-700/30 text-[#2B1615]"
-                      : "bg-[#7A2021]/10 border-[#7A2021]/30 text-[#7A2021]"
-                    }`}
-                >
-                  {tcResult.found ? (
-                    <div className="flex flex-wrap items-center justify-between gap-4">
-                      <div className="space-y-1">
-                        <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase text-emerald-800">
-                          <FileCheck2 className="w-4 h-4" /> Authentic School Record Verified
-                        </span>
-                        <h4 className="font-cinzel font-bold text-lg text-[#7A2021]">
-                          {tcResult.record.student} ({tcResult.record.classLeft})
-                        </h4>
-                        <p className="text-xs text-[#5C3A38]">
-                          TC No: <strong>{tcResult.record.tcNo}</strong> • Admission No:{" "}
-                          <strong>{tcResult.record.admNo}</strong> • Session:{" "}
-                          <strong>{tcResult.record.session}</strong>
-                        </p>
-                      </div>
-                      <span className="px-4 py-1.5 rounded-full bg-[#7A2021] text-[#E5C158] text-xs font-bold">
-                        {tcResult.record.status}
-                      </span>
-                    </div>
-                  ) : (
-                    <p className="text-sm font-medium">{tcResult.msg}</p>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-        </motion.section>
 
         {/* ALBUM-BASED CINEMATIC PHOTO GALLERY */}
         {/* Photo Gallery & Milestones shifted to ShowcasePage */}
@@ -266,54 +197,16 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
           )}
         </AnimatePresence>
 
-        {/* MANDATORY PUBLIC DISCLOSURE SECTION */}
-        <motion.section id="disclosure" className="py-24 bg-[#F6EBD9]/52" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
-          <div className="max-w-6xl mx-auto px-4 space-y-12">
-            <div className="max-w-3xl mx-auto text-center space-y-3">
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#7A2021]">
-                CBSE Appendix IX Compliance
-              </span>
-              <motion.h2 className="text-3xl sm:text-5xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 28, letterSpacing: "0.06em" }} whileInView={{ opacity: 1, y: 0, letterSpacing: "0.01em" }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
-                Mandatory Public Disclosure
-              </motion.h2>
-              <div className="w-24 h-1 bg-[#C59B27] mx-auto rounded-full" />
-            </div>
 
-            <div className="bg-[#FCF7EE] rounded-3xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(122,32,33,0.18)] hover:border-[#C59B27] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(122,32,33,0.15)] p-6 sm:p-10 border border-[#7A2021]/20 shadow-lg overflow-x-auto">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="bg-[#7A2021] text-[#F6EBD9] text-xs uppercase tracking-wider">
-                    <th className="py-4 px-5 rounded-tl-xl">Document / Statutory Information</th>
-                    <th className="py-4 px-5">Reference Code</th>
-                    <th className="py-4 px-5 rounded-tr-xl">Status</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[#7A2021]/10 text-sm">
-                  {mandatoryDisclosures.map((row) => (
-                    <tr key={row.doc} className="hover:bg-[#F6EBD9]/70 transition">
-                      <td className="py-4 px-5 font-semibold text-[#2B1615]">{row.doc}</td>
-                      <td className="py-4 px-5 font-mono text-xs text-[#7A2021]">{row.code}</td>
-                      <td className="py-4 px-5">
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#7A2021]/10 text-[#7A2021] text-xs font-bold">
-                          <ShieldCheck className="w-3.5 h-3.5 text-[#C59B27]" /> {row.status}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </motion.section>
 
         {/* CONTACT SECTION */}
-        <motion.section id="contact" className="py-24 bg-[#FCF7EE]/52 border-t border-[#7A2021]/15" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
+        <motion.section id="contact" className="py-24 bg-[#FCF7EE]/52 border-t border-[#7A2021]/15" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
           <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-5 space-y-6">
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#7A2021]">
                 Get In Touch
               </span>
-              <motion.h2 className="text-3xl sm:text-4xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 28, letterSpacing: "0.06em" }} whileInView={{ opacity: 1, y: 0, letterSpacing: "0.01em" }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
+              <motion.h2 className="text-3xl sm:text-4xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 28, letterSpacing: "0.06em" }} whileInView={{ opacity: 1, y: 0, letterSpacing: "0.01em" }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
                 Contact St. Jude&apos;s H.S. School
               </motion.h2>
               <p className="text-sm sm:text-base text-[#5C3A38] leading-relaxed">
@@ -348,10 +241,10 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
             </div>
 
             <div className="lg:col-span-7 bg-[#F6EBD9] p-8 sm:p-10 rounded-3xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(122,32,33,0.18)] hover:border-[#C59B27] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(122,32,33,0.15)] border border-[#7A2021]/20 shadow-lg">
-              <motion.h3 className="text-2xl font-bold text-[#7A2021] mb-6" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>Send Us a Message</motion.h3>
+              <motion.h3 className="text-2xl font-bold text-[#7A2021] mb-6" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>Send Us a Message</motion.h3>
               {contactSent ? (
                 <div className="p-6 rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl bg-[#FCF7EE] border border-[#7A2021]/20 text-center space-y-3">
-                  <CheckCircle2 className="w-10 h-10 text-[#7A2021] mx-auto" />
+                  <CheckCircle2 className="w-10 h-10 text-[#7A2021]mx-auto" />
                   <h4 className="font-cinzel font-bold text-xl text-[#7A2021]">Message Received</h4>
                   <p className="text-sm text-[#5C3A38]">
                     Thank you for contacting St. Jude&apos;s Higher Secondary School, Khargone. Our office will respond shortly.
@@ -416,7 +309,7 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
               <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#E5C158]">
                 <Award className="w-4 h-4" /> Affiliation No: {schoolInfo.affiliationNo}
               </div>
-              <motion.h3 className="text-2xl font-bold text-[#F6EBD9]" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>{schoolInfo.name}</motion.h3>
+              <motion.h3 className="text-2xl font-bold text-[#F6EBD9]" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>{schoolInfo.name}</motion.h3>
               <p className="text-sm text-[#F6EBD9]/80 max-w-md leading-relaxed">
                 {schoolInfo.address}. Managed by the Catholic Diocese of Khandwa (Regd.) — Sharing Divine Knowledge and Love since 1985.
               </p>
@@ -505,7 +398,7 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
                   <p className="text-[10px] uppercase tracking-widest text-[#E5C158] font-bold">
                     Session 2026–2027
                   </p>
-                  <motion.h3 className="font-cinzel text-lg font-bold" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>Admission Enquiry Form</motion.h3>
+                  <motion.h3 className="font-cinzel text-lg font-bold" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>Admission Enquiry Form</motion.h3>
                 </div>
                 <button
                   onClick={() => {

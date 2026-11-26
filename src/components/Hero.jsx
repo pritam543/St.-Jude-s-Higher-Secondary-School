@@ -15,20 +15,21 @@ export default function Hero({ onOpenAdmission }) {
 
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "24%"]);
   const bgScale = useTransform(scrollYProgress, [0, 1], [1.05, 1.18]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
-  const contentY = useTransform(scrollYProgress, [0, 0.75], ["0%", "18%"]);
+  
 
-  // 4-Corner Puzzle Assembly synchronized with Shutter opening (0.05 -> 0.50)
+  // 4-Corner Puzzle Assembly completes at 0.85 while Hero is still pinned (unpins only at 1.0)
   const activeProgress = shutterProgress || scrollYProgress;
-  const tlX = useTransform(activeProgress, [0.05, 0.5], ["-28%", "0%"]);
-  const tlY = useTransform(activeProgress, [0.05, 0.5], ["-28%", "0%"]);
-  const trX = useTransform(activeProgress, [0.05, 0.5], ["28%", "0%"]);
-  const trY = useTransform(activeProgress, [0.05, 0.5], ["-28%", "0%"]);
-  const blX = useTransform(activeProgress, [0.05, 0.5], ["-28%", "0%"]);
-  const blY = useTransform(activeProgress, [0.05, 0.5], ["28%", "0%"]);
-  const brX = useTransform(activeProgress, [0.05, 0.5], ["28%", "0%"]);
-  const brY = useTransform(activeProgress, [0.05, 0.5], ["28%", "0%"]);
-  const quadOpacity = useTransform(activeProgress, [0.04, 0.45], [0.25, 0.72]);
+  const contentOpacity = useTransform(activeProgress, [0.68, 0.95], [1, 0.35]);
+  const contentY = useTransform(activeProgress, [0.68, 0.95], ["0%", "10%"]);
+  const tlX = useTransform(activeProgress, [0.22, 0.60], ["-48%", "0%"]);
+  const tlY = useTransform(activeProgress, [0.22, 0.60], ["-48%", "0%"]);
+  const trX = useTransform(activeProgress, [0.22, 0.60], ["48%", "0%"]);
+  const trY = useTransform(activeProgress, [0.22, 0.60], ["-48%", "0%"]);
+  const blX = useTransform(activeProgress, [0.22, 0.60], ["-48%", "0%"]);
+  const blY = useTransform(activeProgress, [0.22, 0.60], ["48%", "0%"]);
+  const brX = useTransform(activeProgress, [0.22, 0.60], ["48%", "0%"]);
+  const brY = useTransform(activeProgress, [0.22, 0.60], ["48%", "0%"]);
+  const quadOpacity = useTransform(activeProgress, [0.20, 0.55], [0.65, 1]);
 
 
   return (
@@ -46,7 +47,7 @@ export default function Hero({ onOpenAdmission }) {
         className="absolute inset-0 z-0"
       >
         {/* 4-Corner Assembling School Image Quadrants (Slightly lower opacity for crisp foreground text) */}
-        <motion.div style={{ opacity: quadOpacity }} className="absolute inset-0 w-full h-full">
+        <motion.div style={{ opacity: quadOpacity }} className="absolute inset-0 w-full h-full brightness-110 contrast-105">
           {/* Top-Left Quadrant */}
           <motion.div
             style={{
@@ -93,7 +94,7 @@ export default function Hero({ onOpenAdmission }) {
           />
         </motion.div>
         {/* Luxury Heritage Maroon & Dark Vignette Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1A0405]/55 via-[#240708]/30 to-[#1A0405]/75" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1A0405]/45 via-[#240708]/18 to-[#1A0405]/62" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_45%,#1A0405_100%)] opacity-45" />
       </motion.div>
 
@@ -144,7 +145,7 @@ export default function Hero({ onOpenAdmission }) {
           initial={{ opacity: 0, y: 36 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.15, delay: 0.35, ease: cinematicEase }}
-          className="text-4xl sm:text-6xl lg:text-7xl font-bold text-[#F6EBD9] leading-[1.08] tracking-tight drop-shadow-[0_10px_30px_rgba(0,0,0,0.6)]"
+          className="text-3xl sm:text-5xl lg:text-6xl font-bold text-[#F6EBD9] leading-[1.12] tracking-tight drop-shadow-[0_8px_28px_rgba(0,0,0,0.75)]"
         >
           St. Jude&apos;s Higher Secondary School
         </motion.h1>

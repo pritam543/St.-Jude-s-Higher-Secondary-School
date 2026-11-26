@@ -26,13 +26,13 @@ export default function CampusSections({ onOpenAdmission }) {
   return (
     <ScrollytellingChapter chapterLabel="Chapter III • Academics & Campus" watermark="CBSE • EXCELLENCE">
       <>
-      <motion.section id="admission" className="py-24 bg-[#FCF7EE]/52 border-y border-[#7A2021]/15 overflow-hidden" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
+      <motion.section id="admission" className="py-24 bg-[#FCF7EE]/52 border-y border-[#7A2021]/15 overflow-hidden" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
         <div className="max-w-7xl mx-auto px-4 space-y-16">
           <Scroll3DHeading className="max-w-3xl mx-auto text-center space-y-3">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#7A2021]">
               Enroll &amp; Daily Schedule
             </span>
-            <motion.h2 className="text-3xl sm:text-5xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 28, letterSpacing: "0.06em" }} whileInView={{ opacity: 1, y: 0, letterSpacing: "0.01em" }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
+            <motion.h2 className="text-3xl sm:text-5xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 28, letterSpacing: "0.06em" }} whileInView={{ opacity: 1, y: 0, letterSpacing: "0.01em" }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
               Admissions &amp; School Timings
             </motion.h2>
             <div className="w-24 h-1 bg-[#C59B27] mx-auto rounded-full" />
@@ -40,12 +40,12 @@ export default function CampusSections({ onOpenAdmission }) {
 
           <div className="grid lg:grid-cols-12 gap-10 items-stretch">
             <Scroll3DCard direction="left" className="lg:col-span-5">
-              <div className="h-full bg-[#7A2021] text-[#F6EBD9] rounded-3xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(122,32,33,0.18)] hover:border-[#C59B27] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(122,32,33,0.15)] p-8 sm:p-10 border-2 border-[#C59B27] shadow-xl flex flex-col justify-between space-y-8">
+              <div className="h-full bg-[#7A2021] text-[#F6EBD9] rounded-3xl transition-colors duration-300 hover:border-[#C59B27] p-8 sm:p-10 border-2 border-[#C59B27] shadow-xl flex flex-col justify-between space-y-8">
               <div className="space-y-4">
                 <span className="inline-block px-3 py-1 rounded-full bg-[#C59B27] text-[#2B1615] text-xs font-extrabold uppercase tracking-wider">
                   Session 2026–2027 Open
                 </span>
-                <motion.h3 className="text-2xl sm:text-3xl font-bold text-[#E5C158]" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>
+                <motion.h3 className="text-2xl sm:text-3xl font-bold text-[#E5C158]" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>
                   Begin Your Journey at St. Jude&apos;s
                 </motion.h3>
                 <p className="text-sm text-[#F6EBD9]/90 leading-relaxed">
@@ -78,11 +78,11 @@ export default function CampusSections({ onOpenAdmission }) {
             </Scroll3DCard>
 
             <Scroll3DCard direction="right" className="lg:col-span-7">
-              <div className="h-full bg-[#F6EBD9]/75 rounded-3xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(122,32,33,0.18)] hover:border-[#C59B27] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(122,32,33,0.15)] p-8 sm:p-10 border border-[#7A2021]/20 shadow-lg space-y-6">
+              <div className="h-full bg-[#F6EBD9]/75 rounded-3xl transition-colors duration-300 hover:border-[#C59B27] p-8 sm:p-10 border border-[#7A2021]/20 shadow-lg space-y-6">
               <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#7A2021]/15 pb-5">
                 <div className="flex items-center gap-2.5">
                   <Clock className="w-6 h-6 text-[#7A2021]" />
-                  <motion.h3 className="text-xl sm:text-2xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>
+                  <motion.h3 className="text-xl sm:text-2xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>
                     School &amp; Office Timings
                   </motion.h3>
                 </div>
@@ -120,7 +120,7 @@ export default function CampusSections({ onOpenAdmission }) {
                   transition={{ duration: 0.4, ease: cinematicEase }}
                   className="grid sm:grid-cols-2 gap-5"
                 >
-                  <div className="bg-[#FCF7EE]/72 p-5 rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl border border-[#7A2021]/15 space-y-2">
+                  <Scroll3DCard direction="left"><div className="h-full bg-[#FCF7EE]/72 p-5 rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl border border-[#7A2021]/15 space-y-2">
                     <span className="text-xs font-bold uppercase tracking-wider text-[#C59B27]">
                       Nursery to U.K.G.
                     </span>
@@ -133,9 +133,9 @@ export default function CampusSections({ onOpenAdmission }) {
                     <p className="text-sm text-[#2B1615]">
                       <strong>Saturday:</strong> {timingsData.nurseryToUkg[season].sat}
                     </p>
-                  </div>
+                  </div></Scroll3DCard>
 
-                  <div className="bg-[#FCF7EE]/72 p-5 rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl border border-[#7A2021]/15 space-y-2">
+                  <Scroll3DCard direction="right"><div className="h-full bg-[#FCF7EE]/72 p-5 rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl border border-[#7A2021]/15 space-y-2">
                     <span className="text-xs font-bold uppercase tracking-wider text-[#C59B27]">
                       Classes I to XII
                     </span>
@@ -148,11 +148,11 @@ export default function CampusSections({ onOpenAdmission }) {
                     <p className="text-sm text-[#2B1615]">
                       <strong>Saturday:</strong> {timingsData.class1To12[season].sat}
                     </p>
-                  </div>
+                  </div></Scroll3DCard>
                 </motion.div>
               </AnimatePresence>
 
-              <div className="bg-[#7A2021]/10 p-5 rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl border border-[#7A2021]/20 space-y-1.5">
+              <Scroll3DCard direction="center"><div className="bg-[#7A2021]/10 p-5 rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl border border-[#7A2021]/20 space-y-1.5">
                 <h4 className="font-cinzel font-bold text-base text-[#7A2021]">Office Hours</h4>
                 <p className="text-sm text-[#2B1615]">
                   <strong>Principal:</strong> {timingsData.officeHours.principal} &nbsp;|&nbsp;{" "}
@@ -161,21 +161,21 @@ export default function CampusSections({ onOpenAdmission }) {
                 <p className="text-xs italic text-[#7A2021] font-medium pt-1">
                   Note: {timingsData.officeHours.note}
                 </p>
-              </div>
+              </div></Scroll3DCard>
             </div>
             </Scroll3DCard>
           </div>
         </div>
       </motion.section>
 
-      <motion.section id="facilities" className="py-24 bg-[#F6EBD9]/52 overflow-hidden" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
+      <motion.section id="facilities" className="py-24 bg-[#F6EBD9]/52 overflow-hidden" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
         <div className="max-w-7xl mx-auto px-4 space-y-20">
           <div>
             <Scroll3DHeading className="max-w-3xl mx-auto text-center space-y-3 mb-14">
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#7A2021]">
                 Modern Learning Ecosystem
               </span>
-              <motion.h2 className="text-3xl sm:text-5xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 28, letterSpacing: "0.06em" }} whileInView={{ opacity: 1, y: 0, letterSpacing: "0.01em" }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
+              <motion.h2 className="text-3xl sm:text-5xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 28, letterSpacing: "0.06em" }} whileInView={{ opacity: 1, y: 0, letterSpacing: "0.01em" }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
                 World-Class Facilities
               </motion.h2>
               <div className="w-24 h-1 bg-[#C59B27] mx-auto rounded-full" />
@@ -185,11 +185,11 @@ export default function CampusSections({ onOpenAdmission }) {
               {facilitiesList.map((fac, idx) => (
                 <Scroll3DCard key={fac.title} direction={idx % 3 === 0 ? "left" : idx % 3 === 1 ? "center" : "right"}>
                   <Card3D maxTilt={7}>
-                  <div className="h-full bg-[#FCF7EE]/72 p-7 rounded-3xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(122,32,33,0.18)] hover:border-[#C59B27] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(122,32,33,0.15)] border border-[#7A2021]/15 shadow-md hover:shadow-2xl transition-shadow">
-                    <div className="w-11 h-11 rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl bg-[#7A2021] text-[#E5C158] flex items-center justify-center mb-4">
+                  <div className="h-full bg-[#FCF7EE]/72 p-7 rounded-3xl transition-colors duration-300 hover:border-[#C59B27] border border-[#7A2021]/15 shadow-md hover:shadow-2xl transition-shadow">
+                    <motion.div initial={{ scale: 0.72, rotate: -10, opacity: 0 }} whileInView={{ scale: 1, rotate: 0, opacity: 1 }} whileHover={{ scale: 1.15, rotate: 6 }} viewport={{ once: false, amount: 0.2 }} transition={{ type: "spring", stiffness: 280, damping: 18 }} className="w-11 h-11 rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl bg-[#7A2021] text-[#E5C158] flex items-center justify-center mb-4">
                       <FlaskConical className="w-5 h-5" />
-                    </div>
-                    <motion.h3 className="text-xl font-bold text-[#7A2021] mb-2" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>{fac.title}</motion.h3>
+                    </motion.div>
+                    <motion.h3 className="text-xl font-bold text-[#7A2021] mb-2" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>{fac.title}</motion.h3>
                     <p className="text-sm text-[#5C3A38] leading-relaxed">{fac.desc}</p>
                   </div>
                 </Card3D>
@@ -198,13 +198,13 @@ export default function CampusSections({ onOpenAdmission }) {
             </StaggerContainer>
           </div>
 
-          <div id="infrastructure"><Scroll3DPanel className="bg-[#7A2021] text-[#F6EBD9] rounded-3xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(122,32,33,0.18)] hover:border-[#C59B27] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(122,32,33,0.15)] p-8 sm:p-12 border-2 border-[#C59B27] shadow-2xl">
+          <div id="infrastructure"><Scroll3DPanel className="bg-[#7A2021] text-[#F6EBD9] rounded-3xl transition-colors duration-300 hover:border-[#C59B27] p-8 sm:p-12 border-2 border-[#C59B27] shadow-2xl">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 border-b border-[#F6EBD9]/20 pb-6">
               <div>
                 <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#E5C158] mb-1">
                   <Building2 className="w-4 h-4" /> Campus Architecture &amp; Safety
                 </div>
-                <motion.h3 className="text-2xl sm:text-4xl font-bold text-[#F6EBD9]" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>
+                <motion.h3 className="text-2xl sm:text-4xl font-bold text-[#F6EBD9]" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>
                   Infrastructure Highlights
                 </motion.h3>
               </div>
@@ -219,10 +219,10 @@ export default function CampusSections({ onOpenAdmission }) {
                   key={spec.label}
                   initial={{ opacity: 0, x: idx % 2 === 0 ? -35 : 35 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.35 }}
+                  viewport={{ once: false, amount: 0.35 }}
                   transition={{ duration: 0.85, delay: idx * 0.1, ease: cinematicEase }}
                   whileHover={{ scale: 1.025, rotateX: 3, rotateY: -3 }} style={{ transformPerspective: 1000, willChange: "transform" }}
-                  className="bg-[#541213]/80 p-6 rounded-2xl transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl border border-[#C59B27]/30"
+                  className="bg-[#541213]/85 p-6 rounded-2xl border border-[#C59B27]/40 transition-all duration-300 hover:-translate-y-2.5 hover:scale-[1.03] hover:border-[#E5C158] hover:shadow-[0_22px_45px_rgba(0,0,0,0.45),0_0_25px_rgba(229,193,88,0.35)]"
                 >
                   <h4 className="font-cinzel text-lg font-bold text-[#E5C158] mb-1">{spec.label}</h4>
                   <p className="text-sm text-[#F6EBD9]/90 leading-relaxed">{spec.value}</p>
@@ -233,13 +233,13 @@ export default function CampusSections({ onOpenAdmission }) {
         </div>
       </motion.section>
 
-      <motion.section id="academics" className="py-24 bg-[#FCF7EE]/52 border-t border-[#7A2021]/15 overflow-hidden" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
+      <motion.section id="academics" className="py-24 bg-[#FCF7EE]/52 border-t border-[#7A2021]/15 overflow-hidden" initial={{ opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.1 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
         <div className="max-w-7xl mx-auto px-4 space-y-14">
           <Scroll3DHeading className="max-w-3xl mx-auto text-center space-y-3">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#7A2021]">
               CBSE Curriculum &amp; Excellence
             </span>
-            <motion.h2 className="text-3xl sm:text-5xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 28, letterSpacing: "0.06em" }} whileInView={{ opacity: 1, y: 0, letterSpacing: "0.01em" }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
+            <motion.h2 className="text-3xl sm:text-5xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 28, letterSpacing: "0.06em" }} whileInView={{ opacity: 1, y: 0, letterSpacing: "0.01em" }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
               Academics &amp; Board Toppers
             </motion.h2>
             <div className="w-24 h-1 bg-[#C59B27] mx-auto rounded-full" />
@@ -249,15 +249,15 @@ export default function CampusSections({ onOpenAdmission }) {
             {academicsStreams.map((stream, idx) => (
               <Scroll3DCard key={stream.level} direction={idx % 2 === 0 ? "left" : "right"}>
                 <Card3D maxTilt={7}>
-                  <div className="h-full bg-[#F6EBD9]/75 p-7 rounded-3xl transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(122,32,33,0.18)] hover:border-[#C59B27] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_45px_rgba(122,32,33,0.15)] border border-[#7A2021]/20 flex flex-col justify-between space-y-4 shadow-sm hover:shadow-xl transition-shadow">
+                  <div className="h-full bg-[#F6EBD9]/75 p-7 rounded-3xl transition-colors duration-300 hover:border-[#C59B27] border border-[#7A2021]/20 flex flex-col justify-between space-y-4 shadow-sm hover:shadow-xl transition-shadow">
                   <div className="space-y-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#7A2021] text-[#E5C158] flex items-center justify-center">
+                    <motion.div initial={{ scale: 0.72, rotate: -10, opacity: 0 }} whileInView={{ scale: 1, rotate: 0, opacity: 1 }} whileHover={{ scale: 1.15, rotate: 6 }} viewport={{ once: false, amount: 0.2 }} transition={{ type: "spring", stiffness: 280, damping: 18 }} className="w-10 h-10 rounded-xl bg-[#7A2021] text-[#E5C158] flex items-center justify-center">
                       <GraduationCap className="w-5 h-5" />
-                    </div>
+                    </motion.div>
                     <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#7A2021] bg-[#FCF7EE]/72 px-3 py-1 rounded-full">
                       {stream.grades}
                     </span>
-                    <motion.h3 className="text-xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>{stream.level}</motion.h3>
+                    <motion.h3 className="text-xl font-bold text-[#7A2021]" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>{stream.level}</motion.h3>
                     <p className="text-sm text-[#5C3A38] leading-relaxed">{stream.focus}</p>
                   </div>
                   <div className="pt-3 border-t border-[#7A2021]/10 flex items-center gap-2 text-xs font-bold text-[#7A2021]">

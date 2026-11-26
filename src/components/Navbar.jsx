@@ -15,7 +15,7 @@ const navLinks = [
   { label: "Contact", href: "#contact" }
 ];
 
-export default function Navbar({ onOpenAdmission, showMainNav = true }) {
+export default function Navbar({ onOpenAdmission, onNavigate, showMainNav = true }) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -87,6 +87,12 @@ export default function Navbar({ onOpenAdmission, showMainNav = true }) {
                   <a
                     key={item.label}
                     href={item.href}
+                    onClick={(e) => {
+                      if (onNavigate) {
+                        e.preventDefault();
+                        onNavigate(item.href);
+                      }
+                    }}
                     className="text-xs font-semibold uppercase tracking-wider text-[#2B1615] hover:text-[#7A2021] transition relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#C59B27] hover:after:w-full after:transition-all"
                   >
                     {item.label}
@@ -118,7 +124,13 @@ export default function Navbar({ onOpenAdmission, showMainNav = true }) {
                     <a
                       key={item.label}
                       href={item.href}
-                      onClick={() => setMobileOpen(false)}
+                      onClick={(e) => {
+                      setMobileOpen(false);
+                      if (onNavigate && item?.href) {
+                        e.preventDefault();
+                        onNavigate(item.href);
+                      }
+                    }}
                       className="text-xs font-semibold uppercase tracking-wider text-[#2B1615] hover:text-[#7A2021] py-2 px-2 rounded-lg hover:bg-[#F6EBD9]"
                     >
                       {item.label}
