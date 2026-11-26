@@ -116,38 +116,116 @@ export default function Navbar({ onOpenAdmission, onNavigate, showMainNav = true
               </button>
             </div>
 
-            {/* Mobile Drawer */}
-            {mobileOpen && (
-              <div className="xl:hidden bg-[#FCF7EE] border-t border-[#7A2021]/15 px-4 py-4 space-y-3">
-                <div className="grid grid-cols-2 gap-2">
-                  {navLinks.map((item) => (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      onClick={(e) => {
-                      setMobileOpen(false);
-                      if (onNavigate && item?.href) {
-                        e.preventDefault();
-                        onNavigate(item.href);
-                      }
+            {/* Mobile Drawer — macOS Genie Minimize/Restore Animation + Outside Touch Auto-Close */}
+            <AnimatePresence>
+              {mobileOpen && (
+                <>
+                  {/* Outside Touch / Tap Backdrop (auto-closes drawer when user touches anywhere below navbar) */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.28 }}
+                    onClick={() => setMobileOpen(false)}
+                    onTouchStart={() => setMobileOpen(false)}
+                    aria-hidden="true"
+                    className="xl:hidden fixed inset-0 top-full h-screen bg-[#2B1615]/30 backdrop-blur-[2px] z-10"
+                  />
+
+                  {/* macOS Genie Minimize/Restore Animated Menu Sheet */}
+                  <motion.div
+                    initial={{
+                      opacity: 0,
+                      scale: 0.22,
+                      y: -18,
+                      rotateX: -16
                     }}
-                      className="text-xs font-semibold uppercase tracking-wider text-[#2B1615] hover:text-[#7A2021] py-2 px-2 rounded-lg hover:bg-[#F6EBD9]"
+                    animate={{
+                      opacity: 1,
+                      scale: 1,
+                      y: 0,
+                      rotateX: 0
+                    }}
+                    exit={{
+                      opacity: 0,
+                      scale: 0.18,
+                      y: -20,
+                      rotateX: -18
+                    }}
+                    transition={{
+                      duration: 0.72,
+                      ease: [0.16, 1, 0.3, 1]
+                    }}
+                    style={{
+                      transformOrigin: "top right",
+                      transformPerspective: 900,
+                      willChange: "transform, opacity"
+                    }}
+                    className="xl:hidden relative z-20 bg-[#FCF7EE] border-t border-b-2 border-[#C59B27]/50 shadow-[0_24px_50px_rgba(43,22,21,0.28)] px-4 py-4 space-y-3 overflow-hidden"
+                  >
+                    <motion.div
+                      initial="closed"
+                      animate="open"
+                      exit="closed"
+                      variants={{
+                        closed: {},
+                        open: {
+                          transition: {
+                            staggerChildren: 0.055,
+                            delayChildren: 0.12
+                          }
+                        }
+                      }}
+                      className="grid grid-cols-2 gap-2"
                     >
-                      {item.label}
-                    </a>
-                  ))}
-                </div>
-                <button
-                  onClick={() => {
-                    setMobileOpen(false);
-                    onOpenAdmission();
-                  }}
-                  className="w-full bg-[#7A2021] text-[#F6EBD9] text-xs font-bold uppercase tracking-wider py-3 rounded-full border border-[#C59B27]"
-                >
-                  Admissions 2026–27
-                </button>
-              </div>
-            )}
+                      {navLinks.map((item) => (
+                        <motion.a
+                          key={item.label}
+                          href={item.href}
+                          variants={{
+                            closed: { opacity: 0, y: -8, scale: 0.9 },
+                            open: {
+                              opacity: 1,
+                              y: 0,
+                              scale: 1,
+                              transition: { duration: 0.42, ease: [0.16, 1, 0.3, 1] }
+                            }
+                          }}
+                          onClick={(e) => {
+                            setMobileOpen(false);
+                            if (onNavigate && item?.href) {
+                              e.preventDefault();
+                              onNavigate(item.href);
+                            }
+                          }}
+                          whileHover={{ scale: 1.04, y: -2 }}
+                          whileTap={{ scale: 0.96 }}
+                          className="text-xs font-semibold uppercase tracking-wider text-[#2B1615] hover:text-[#7A2021] transition-all duration-200 py-2.5 px-3 rounded-xl bg-[#F6EBD9]/55 hover:bg-[#F6EBD9] border border-[#7A2021]/15 hover:border-[#C59B27] hover:shadow-[0_6px_16px_rgba(122,32,33,0.16)]"
+                        >
+                          {item.label}
+                        </motion.a>
+                      ))}
+                    </motion.div>
+
+                    <motion.button
+                      initial={{ opacity: 0, y: 8, scale: 0.94 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -6, scale: 0.9 }}
+                      transition={{ duration: 0.46, delay: 0.26, ease: [0.16, 1, 0.3, 1] }}
+                      onClick={() => {
+                        setMobileOpen(false);
+                        onOpenAdmission();
+                      }}
+                      whileHover={{ scale: 1.025, y: -2 }}
+                      whileTap={{ scale: 0.97 }}
+                      className="w-full bg-[#7A2021] hover:bg-[#541213] transition-all duration-200 text-[#F6EBD9] text-xs font-bold uppercase tracking-wider py-3 rounded-full border border-[#C59B27] hover:border-[#E5C158] shadow-md hover:shadow-[0_10px_24px_rgba(122,32,33,0.32)] cursor-pointer"
+                    >
+                      Admissions 2026–27
+                    </motion.button>
+                  </motion.div>
+                </>
+              )}
+            </AnimatePresence>
           </motion.nav>
         )}
       </AnimatePresence>
