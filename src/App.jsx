@@ -19,19 +19,27 @@ export default function App() {
   const [complianceSection, setComplianceSection] = useState("tc");
 
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 0.95,
-      easing: (t) => 1 - Math.pow(1 - t, 4),
-      smoothWheel: true,
-      wheelMultiplier: 1.05,
-      touchMultiplier: 1.5
-    });
+    const isTouchMobile =
+      typeof window !== "undefined" &&
+      (window.innerWidth < 768 || "ontouchstart" in window || navigator.maxTouchPoints > 0);
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+    const lenis = isTouchMobile
+      ? null
+      : new Lenis({
+          duration: 0.95,
+          easing: (t) => 1 - Math.pow(1 - t, 4),
+          smoothWheel: true,
+          wheelMultiplier: 1.05
+        });
+
+    let rafId = null;
+    if (lenis) {
+      function raf(time) {
+        lenis.raf(time);
+        rafId = requestAnimationFrame(raf);
+      }
+      rafId = requestAnimationFrame(raf);
     }
-    const rafId = requestAnimationFrame(raf);
 
     const handleScroll = () => {
       const shutterOpenThreshold = window.innerHeight * 0.95;
@@ -57,10 +65,10 @@ export default function App() {
     window.addEventListener("hashchange", handleHashChange);
 
     return () => {
-      cancelAnimationFrame(rafId);
+      if (rafId) cancelAnimationFrame(rafId);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("hashchange", handleHashChange);
-      lenis.destroy();
+      if (lenis) lenis.destroy();
     };
   }, []);
 
