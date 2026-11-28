@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { ScrollytellingChapter } from "./ScrollytellingEngine";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -10,7 +10,10 @@ import {
   BookOpen,
   CheckCircle2,
   ArrowUpRight,
-  GraduationCap
+  GraduationCap,
+  Sparkles,
+  Maximize2,
+  X
 } from "lucide-react";
 import {
   timingsData,
@@ -19,9 +22,63 @@ import {
   academicsStreams
 } from "../data/schoolData";
 import { Reveal, StaggerContainer, StaggerItem, cinematicEase, Card3D, Scroll3DCard, Scroll3DPanel, Scroll3DHeading } from "./MotionPrimitives";
+// Exact 3 Winter images requested: Campus 2nd image (8.jpg) + Sports 4th & 5th images (4.jpeg, 7.jpeg)
+import winterCampus2 from "../assets/gallery/campus/8.jpg";
+import winterSport4 from "../assets/gallery/sports/4.jpeg";
+import winterSport5 from "../assets/gallery/sports/7.jpeg";
+
+// Exact 3 Summer images requested from Cultural (events) folder: starting 2nd (10.jpeg), starting 3rd (11.jpeg), last 3rd (9.jpeg)
+import summerKids1 from "../assets/gallery/events/10.jpeg";
+import summerKids2 from "../assets/gallery/events/11.jpeg";
+import summerKids3 from "../assets/gallery/events/9.jpeg";
 
 export default function CampusSections({ onOpenAdmission }) {
   const [season, setSeason] = useState("summer");
+  const [popupPhoto, setPopupPhoto] = useState(null);
+  const [slideIdx, setSlideIdx] = useState(0);
+
+  useEffect(() => {
+    setSlideIdx(0);
+  }, [season]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSlideIdx((prev) => (prev + 1) % 3);
+    }, 3200);
+    return () => clearInterval(timer);
+  }, [season]);
+
+  const seasonalMedia = {
+    summer: {
+      badge: "Summer Schedule • Early Morning Session",
+      title: "Summer Morning Students & Outdoor Sports",
+      subtitle: "7:20 AM – 1:30 PM • Energized students in summer session enjoying morning athletics, games & bright campus mornings.",
+      slides: [
+        { src: summerKids1, label: "Summer Session • Morning Ground Activities" },
+        { src: summerKids2, label: "Summer Session • Active Outdoor Sports" },
+        { src: summerKids3, label: "Summer Session • St. Jude's Young Athletes" }
+      ],
+      accentGradient: "from-[#E5C158]/35 via-[#C59B27]/15 to-[#7A2021]/85",
+      orbColor: "rgba(229, 193, 88, 0.52)"
+    },
+    winter: {
+      badge: "Winter Schedule • Crisp Morning Session",
+      title: "Winter Morning Students & Campus Life",
+      subtitle: "8:00 AM – 2:10 PM • Students in warm winter uniform & sweaters during morning campus sessions & winter sports.",
+      slides: [
+        { src: winterCampus2, label: "Winter Campus • Crisp Morning Session" },
+        { src: winterSport4, label: "Winter Session • Students in Winter Uniform" },
+        { src: winterSport5, label: "Winter Session • Morning Sports & Assembly" }
+      ],
+      accentGradient: "from-[#93C5FD]/30 via-[#E5C158]/20 to-[#541213]/90",
+      orbColor: "rgba(186, 230, 253, 0.48)"
+    }
+  };
+
+  const activeMedia = seasonalMedia[season];
+  const currentSlide = activeMedia.slides[slideIdx % activeMedia.slides.length];
+  const nextSlide = activeMedia.slides[(slideIdx + 1) % activeMedia.slides.length];
+
 
   return (
     <ScrollytellingChapter chapterLabel="Chapter III • Academics & Campus" watermark="CBSE • EXCELLENCE">
@@ -40,41 +97,129 @@ export default function CampusSections({ onOpenAdmission }) {
 
           <div className="grid lg:grid-cols-12 gap-10 items-stretch">
             <Scroll3DCard direction="left" className="lg:col-span-5">
-              <div className="h-full bg-[#7A2021] text-[#F6EBD9] rounded-3xl transition-colors duration-300 hover:border-[#C59B27] p-8 sm:p-10 border-2 border-[#C59B27] shadow-xl flex flex-col justify-between space-y-8">
-              <div className="space-y-4">
-                <span className="inline-block px-3 py-1 rounded-full bg-[#C59B27] text-[#2B1615] text-xs font-extrabold uppercase tracking-wider">
-                  Session 2026–2027 Open
-                </span>
-                <motion.h3 className="text-2xl sm:text-3xl font-bold text-[#E5C158]" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.25 }} transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>
-                  Begin Your Journey at St. Jude&apos;s
-                </motion.h3>
-                <p className="text-sm text-[#F6EBD9]/90 leading-relaxed">
-                  Admissions open for Nursery to Class IX &amp; Class XI (Science, Commerce &amp; Humanities). Experience CBSE excellence rooted in discipline, values, and holistic growth.
-                </p>
-                <ul className="space-y-2.5 pt-2 text-xs sm:text-sm">
-                  {[
-                    "Birth Certificate & Previous Report Card",
-                    "Original Transfer Certificate (TC) from Previous School",
-                    "Aadhaar Card & Passport Size Photographs",
-                    "Interaction / Entrance Assessment as per CBSE Norms"
-                  ].map((doc) => (
-                    <li key={doc} className="flex items-start gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 text-[#E5C158] shrink-0 mt-0.5" />
-                      <span>{doc}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <div className="relative h-full min-h-[440px] bg-gradient-to-br from-[#2B1615] via-[#541213] to-[#7A2021] text-[#F6EBD9] rounded-3xl p-6 sm:p-8 border-2 border-[#C59B27] shadow-2xl flex flex-col justify-between overflow-hidden">
+                {/* Ambient Seasonal Glow Aura */}
+                <motion.div
+                  key={season + "-aura"}
+                  initial={{ scale: 0.6, opacity: 0 }}
+                  animate={{ scale: [1, 1.18, 1], opacity: [0.55, 0.85, 0.55] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                  style={{ background: `radial-gradient(circle, ${activeMedia.orbColor} 0%, transparent 70%)` }}
+                  className="pointer-events-none absolute -top-16 -right-16 w-72 h-72 rounded-full blur-2xl"
+                />
 
-              <motion.button
-                whileHover={{ scale: 1.025, rotateX: 3, rotateY: -3 }} style={{ transformPerspective: 1000, willChange: "transform" }}
-                whileTap={{ scale: 0.98 }}
-                onClick={onOpenAdmission}
-                className="w-full bg-[#E5C158] hover:bg-[#C59B27] text-[#2B1615] font-bold text-xs sm:text-sm uppercase tracking-wider py-4 rounded-full shadow-lg transition flex items-center justify-center gap-2 cursor-pointer"
-              >
-                Online Admission Enquiry <ArrowUpRight className="w-4 h-4" />
-              </motion.button>
-            </div>
+                {/* Top Seasonal Header Badge */}
+                <div className="relative z-10 flex items-center justify-between gap-2">
+                  <motion.span
+                    key={season + "-badge"}
+                    initial={{ opacity: 0, y: -12, scale: 0.88 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#C59B27] text-[#2B1615] text-[11px] font-extrabold uppercase tracking-wider shadow-md"
+                  >
+                    {season === "summer" ? <Sun className="w-3.5 h-3.5" /> : <Snowflake className="w-3.5 h-3.5" />}
+                    {activeMedia.badge}
+                  </motion.span>
+                  <span className="inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-widest text-[#E5C158]/90">
+                    <Sparkles className="w-3.5 h-3.5" /> 3D View
+                  </span>
+                </div>
+
+                {/* 3D Pop-Up 3-Image Auto-Slideshow Stage */}
+                <div style={{ perspective: 1200 }} className="relative z-10 my-5 flex-1 flex flex-col justify-center">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={season + "-" + slideIdx}
+                      initial={{ opacity: 0, scale: 0.76, rotateY: season === "summer" ? -22 : 22, rotateX: 14, y: 24 }}
+                      animate={{ opacity: 1, scale: 1, rotateY: 0, rotateX: 0, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.8, rotateY: season === "summer" ? 20 : -20, rotateX: -12, y: -18 }}
+                      transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                      style={{ transformStyle: "preserve-3d" }}
+                      className="relative w-full"
+                    >
+                      {/* Main 3D Floating Campus Photo Frame */}
+                      <motion.div
+                        animate={{ y: [-4, 5, -4], rotateX: [0, 2, 0] }}
+                        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+                        whileHover={{ scale: 1.03, rotateY: -4, rotateX: 3 }}
+                        onClick={() => setPopupPhoto({ src: currentSlide.src, title: currentSlide.label, tag: activeMedia.badge })}
+                        className="group relative rounded-2xl overflow-hidden border-2 border-[#E5C158]/85 shadow-[0_22px_50px_rgba(0,0,0,0.55)] cursor-pointer aspect-[16/10]"
+                      >
+                        <img
+                          src={currentSlide.src}
+                          alt={currentSlide.label}
+                          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                        />
+                        <div className={`absolute inset-0 bg-gradient-to-t ${activeMedia.accentGradient}`} />
+                        <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-[#2B1615]/75 border border-[#E5C158]/70 text-[#E5C158] flex items-center justify-center opacity-85 group-hover:opacity-100 group-hover:scale-110 transition">
+                          <Maximize2 className="w-4 h-4" />
+                        </div>
+                        <div className="absolute bottom-3 left-3.5 right-3.5">
+                          <span className="inline-block text-[10px] font-bold uppercase tracking-widest text-[#E5C158] bg-[#2B1615]/80 px-2.5 py-0.5 rounded-full border border-[#C59B27]/50 mb-1">
+                            Photo {slideIdx + 1} of 3 • Tap to Pop-Up Zoom
+                          </span>
+                          <p className="text-sm sm:text-base font-bold text-[#FCF7EE] drop-shadow">
+                            {currentSlide.label}
+                          </p>
+                        </div>
+                      </motion.div>
+
+                      {/* Floating 3D Next-Slide Preview Card */}
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.68, x: 20, y: 16, rotateZ: 7 }}
+                        animate={{ opacity: 1, scale: 1, x: 0, y: 0, rotateZ: -3 }}
+                        transition={{ duration: 0.65, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+                        whileHover={{ scale: 1.08, rotateZ: 0, y: -4 }}
+                        onClick={() => setSlideIdx((prev) => (prev + 1) % 3)}
+                        className="hidden sm:block absolute -bottom-5 -right-3 w-36 h-24 rounded-xl overflow-hidden border-2 border-[#E5C158] shadow-[0_16px_35px_rgba(0,0,0,0.65)] cursor-pointer bg-[#2B1615]"
+                      >
+                        <img
+                          src={nextSlide.src}
+                          alt={nextSlide.label}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#2B1615]/90 via-transparent to-transparent" />
+                        <span className="absolute bottom-1.5 left-2 right-2 text-[10px] font-bold text-[#E5C158] leading-tight line-clamp-1">
+                          Next Slide ({((slideIdx + 1) % 3) + 1}/3) →
+                        </span>
+                      </motion.div>
+                    </motion.div>
+                  </AnimatePresence>
+
+                  {/* Slideshow Indicator Dots */}
+                  <div className="flex items-center justify-center gap-2 mt-4">
+                    {activeMedia.slides.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setSlideIdx(i)}
+                        aria-label={`Slide ${i + 1}`}
+                        className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                          slideIdx === i ? "w-7 bg-[#E5C158]" : "w-2 bg-[#F6EBD9]/40 hover:bg-[#F6EBD9]/75"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Bottom Dynamic Seasonal Caption */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={season + "-caption"}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                    className="relative z-10 pt-2 space-y-1 border-t border-[#E5C158]/25"
+                  >
+                    <h4 className="font-cinzel text-lg sm:text-xl font-bold text-[#E5C158]">
+                      {activeMedia.title}
+                    </h4>
+                    <p className="text-xs sm:text-sm text-[#F6EBD9]/90 leading-relaxed">
+                      {activeMedia.subtitle}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
             </Scroll3DCard>
 
             <Scroll3DCard direction="right" className="lg:col-span-7">

@@ -1,3 +1,4 @@
+import { submitToGoogleSheet, fetchTcRecordsFromSheet } from "../services/googleSheets";
 ﻿import React, { useState, useMemo } from "react";
 import { Scroll3DPanel, Scroll3DHeading } from "./MotionPrimitives";
 import { ScrollytellingChapter } from "./ScrollytellingEngine";
@@ -47,6 +48,16 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
   const [tcResult, setTcResult] = useState(null);
   const [contactSent, setContactSent] = useState(false);
   const [admissionSent, setAdmissionSent] = useState(false);
+  const [contactSending, setContactSending] = useState(false);
+  const [admissionSending, setAdmissionSending] = useState(false);
+  const [tcRecords, setTcRecords] = useState(sampleTCs);
+  const [tcSearching, setTcSearching] = useState(false);
+
+  React.useEffect(() => {
+    fetchTcRecordsFromSheet(sampleTCs).then((records) => {
+      if (records && records.length) setTcRecords(records);
+    });
+  }, []);
 
   // null = shows the 5 Category Album Cards; string = shows photos inside that album
   const [selectedAlbum, setSelectedAlbum] = useState(null);
@@ -98,14 +109,18 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
     }
   };
 
-  const handleTcSearch = (e) => {
+  const handleTcSearch = async (e) => {
     e.preventDefault();
     const q = tcQuery.trim().toLowerCase();
     if (!q) {
       setTcResult({ found: false, msg: "Please enter a TC Number or Admission Number." });
       return;
     }
-    const match = sampleTCs.find(
+    setTcSearching(true);
+    const liveRecords = await fetchTcRecordsFromSheet(tcRecords);
+    setTcRecords(liveRecords);
+    setTcSearching(false);
+    const match = liveRecords.find(
       (item) =>
         item.tcNo.toLowerCase() === q ||
         item.admNo.toLowerCase() === q ||
@@ -258,9 +273,25 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
                 </div>
               ) : (
                 <form
-                  onSubmit={(e) => {
+                  onSubmit={async (e) => {
                     e.preventDefault();
-                    setContactSent(true);
+                    if (contactSending) return;
+                    setContactSending(true);
+                    const form = e.currentTarget;
+                    const inputs = form.querySelectorAll("input, textarea");
+                    try {
+                      await submitToGoogleSheet({
+                        category: "contact",
+                        name: inputs[0]?.value?.trim() || "",
+                        phone: inputs[1]?.value?.trim() || "",
+                        email: inputs[2]?.value?.trim() || "",
+                        subject: "Website Contact Enquiry",
+                        message: inputs[3]?.value?.trim() || "",
+                      });
+                    } finally {
+                      setContactSending(false);
+                      setContactSent(true);
+                    }
                   }}
                   className="space-y-4"
                 >
@@ -433,9 +464,27 @@ export default function PortalAndFooter({ admissionOpen, onCloseAdmission }) {
                   </div>
                 ) : (
                   <form
-                    onSubmit={(e) => {
+                    onSubmit={async (e) => {
                       e.preventDefault();
-                      setAdmissionSent(true);
+                      if (admissionSending) return;
+                      setAdmissionSending(true);
+                      const form = e.currentTarget;
+                      const inputs = form.querySelectorAll("input, select");
+                      try {
+                        await submitToGoogleSheet({
+                          category: "admission",
+                          studentName: inputs[0]?.value?.trim() || "",
+                          classApplied: inputs[1]?.value?.trim() || "",
+                          phone: inputs[2]?.value?.trim() || "",
+                          parentName: inputs[3]?.value?.trim() || "",
+                          email: "",
+                          previousSchool: "",
+                          message: "Online Admission Enquiry Modal (2026-27)",
+                        });
+                      } finally {
+                        setAdmissionSending(false);
+                        setAdmissionSent(true);
+                      }
                     }}
                     className="space-y-4"
                   >

@@ -16,6 +16,8 @@ import {
   mandatoryDisclosures,
   sampleTCs
 } from "../data/schoolData";
+import { fetchTcRecordsFromSheet } from "../services/googleSheets";
+
 
 export default function CompliancePortalPage({
   onBackHome,
@@ -25,6 +27,13 @@ export default function CompliancePortalPage({
 }) {
   const [tcQuery, setTcQuery] = useState("");
   const [tcResult, setTcResult] = useState(null);
+  const [tcRecords, setTcRecords] = useState(sampleTCs);
+
+  React.useEffect(() => {
+    fetchTcRecordsFromSheet(sampleTCs).then((records) => {
+      if (records && records.length) setTcRecords(records);
+    });
+  }, []);
 
   const scrollToSection = (sectionId) => {
     const id = sectionId === "disclosure" ? "disclosure" : "tc";
@@ -46,14 +55,16 @@ export default function CompliancePortalPage({
     }
   }, [initialSection]);
 
-  const handleTcSearch = (e) => {
+  const handleTcSearch = async (e) => {
     e.preventDefault();
     const q = tcQuery.trim().toLowerCase();
     if (!q) {
       setTcResult({ found: false, msg: "Please enter a TC Number or Admission Number." });
       return;
     }
-    const match = sampleTCs.find(
+    const liveRecords = await fetchTcRecordsFromSheet(tcRecords);
+    setTcRecords(liveRecords);
+    const match = liveRecords.find(
       (item) =>
         item.tcNo.toLowerCase() === q ||
         item.admNo.toLowerCase() === q ||
